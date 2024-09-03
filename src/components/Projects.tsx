@@ -1,0 +1,95 @@
+import { CodeXml, Github, SquareArrowOutUpRight } from 'lucide-react';
+import { AnimatedBackground } from './AnimatedBackground';
+import { Link } from '@tanstack/react-router';
+
+function Projects() {
+  return (
+    <section id="projects" className="mt-40">
+      <Link className="mb-8 block w-max" hash="projects">
+        <h1 className="text-48 flex w-max items-center gap-2 font-dank font-semibold text-gold hover:text-gold/80">
+          <CodeXml size={48} /> Projects
+        </h1>
+      </Link>
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+        <AnimatedBackground
+          className="rounded-lg bg-darker"
+          enableHover
+          transition={{
+            type: 'spring',
+            bounce: 0.2,
+            duration: 0.6
+          }}
+        >
+          {PROJECTS.map((project, index) => (
+            <div key={index} data-id={`card-${index}`}>
+              <div className="flex select-none flex-col space-y-1 p-4">
+                <h3 className="text-18 font-medium">{project.title}</h3>
+                <p className="text-16 text-light">{project.description}</p>
+              </div>
+              <div className="flex gap-4 px-4 pb-4">
+                {project.link && (
+                  <a
+                    className="text-gold hover:text-gold/80"
+                    href={project.link}
+                  >
+                    <SquareArrowOutUpRight size={18} />
+                  </a>
+                )}
+                {project.github && (
+                  <a
+                    className="text-gold hover:text-gold/80"
+                    href={project.github}
+                  >
+                    <Github size={18} />
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+        </AnimatedBackground>
+      </div>
+    </section>
+  );
+}
+
+export { Projects };
+
+const PROJECTS = [
+  {
+    id: 1,
+    title: 'The Rusty Spoke',
+    description:
+      'The first website I built, for a non-profit bicycle repair shop in downtown Phoenix, AZ. Hosted on GitHub pages. Built with vanilla HTML.',
+    link: 'https://www.rustyspoke.org/',
+    github: 'https://github.com/rustyspoke/rustyspoke.github.io'
+  },
+  {
+    id: 2,
+    title: 'Paint River Rentals',
+    description:
+      'A website built for rental properties in my hometown. Hosted on GitHub Pages. Vanilla HTML and TypeScript with TailwindCSS.',
+    link: 'https://paintriverrentals.com/',
+    github: 'https://github.com/FrankieMarie/paint-river-rentals'
+  },
+  {
+    id: 3,
+    title: 'React Memory Game',
+    description:
+      'A simple memory game built with React and Vite, hosted with Azure Static Web Apps and automatic deployment with GitHub Actions.',
+    github: 'https://github.com/FrankieMarie/memory-game'
+  },
+  {
+    id: 4,
+    title: 'Fullstack Playground',
+    description:
+      'A fullstack React + Hono app where I experiment with tools I am interested in. Uses a SQLite DB with fullstack type safety.',
+    github: 'https://github.com/FrankieMarie/react-playground'
+  },
+  {
+    id: 5,
+    title: 'FM Web Dev',
+    description:
+      'My personal website. Built with React, Framer Motion, Three.js, and Tailwind. Constantly evolving, perpetually improving.',
+    github: 'https://github.com/FrankieMarie/frankiemarie.me'
+  }
+];

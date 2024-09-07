@@ -1,6 +1,7 @@
 import { CodeXml, Github, SquareArrowOutUpRight } from 'lucide-react';
 import { AnimatedBackground } from './AnimatedBackground';
 import { Link } from '@tanstack/react-router';
+import { InView } from './InView';
 
 function Projects() {
   return (
@@ -11,44 +12,59 @@ function Projects() {
           <CodeXml className="hidden md:block" size={48} /> Projects
         </h1>
       </Link>
-      <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-        <AnimatedBackground
-          className="rounded-lg bg-darker"
-          enableHover
-          transition={{
-            type: 'spring',
-            bounce: 0.2,
-            duration: 0.6
-          }}
-        >
-          {PROJECTS.map((project, index) => (
-            <div key={index} data-id={`card-${index}`} className="relative">
-              <div className="flex select-none flex-col space-y-1 p-4">
-                <h3 className="text-20 font-medium">{project.title}</h3>
-                <p className="text-16 text-light">{project.description}</p>
+      <InView
+        viewOptions={{ once: false, margin: '0px 0px -250px 0px' }}
+        variants={{
+          hidden: {
+            opacity: 0
+          },
+          visible: {
+            opacity: 1,
+            transition: {
+              staggerChildren: 0.09
+            }
+          }
+        }}
+      >
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+          <AnimatedBackground
+            className="rounded-lg bg-darker"
+            enableHover
+            transition={{
+              type: 'spring',
+              bounce: 0.2,
+              duration: 0.6
+            }}
+          >
+            {PROJECTS.map((project, index) => (
+              <div key={index} data-id={`card-${index}`} className="relative">
+                <div className="flex select-none flex-col space-y-1 p-4">
+                  <h3 className="text-20 font-medium">{project.title}</h3>
+                  <p className="text-16 text-light">{project.description}</p>
+                </div>
+                <div className="flex gap-4 px-4 pb-4">
+                  {project.link && (
+                    <a
+                      className="text-gold hover:text-gold/80"
+                      href={project.link}
+                    >
+                      <SquareArrowOutUpRight size={18} />
+                    </a>
+                  )}
+                  {project.github && (
+                    <a
+                      className="text-gold hover:text-gold/80"
+                      href={project.github}
+                    >
+                      <Github size={18} />
+                    </a>
+                  )}
+                </div>
               </div>
-              <div className="flex gap-4 px-4 pb-4">
-                {project.link && (
-                  <a
-                    className="text-gold hover:text-gold/80"
-                    href={project.link}
-                  >
-                    <SquareArrowOutUpRight size={18} />
-                  </a>
-                )}
-                {project.github && (
-                  <a
-                    className="text-gold hover:text-gold/80"
-                    href={project.github}
-                  >
-                    <Github size={18} />
-                  </a>
-                )}
-              </div>
-            </div>
-          ))}
-        </AnimatedBackground>
-      </div>
+            ))}
+          </AnimatedBackground>
+        </div>
+      </InView>
     </section>
   );
 }

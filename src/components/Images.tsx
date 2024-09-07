@@ -23,7 +23,7 @@ function Images() {
               className="h-60 w-60 cursor-grab p-2 py-4 grayscale transition-all hover:grayscale-0 lg:h-72 lg:w-72"
             >
               <img
-                className="pointer-events-none h-full w-full rounded-br-3xl rounded-tl-3xl object-cover"
+                className="pointer-events-none h-full w-full rounded-br-3xl rounded-tl-3xl object-cover shadow-lg"
                 src={image}
                 loading="lazy"
                 alt=""
@@ -32,7 +32,7 @@ function Images() {
           ))}
         </motion.div>
       </div>
-      <MoveHorizontal className="mx-auto text-medium" />
+      <MoveHorizontal className="text-lightGreen/75 mx-auto" />
     </section>
   );
 }

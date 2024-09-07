@@ -4,6 +4,7 @@ import { cn } from '../utils';
 import { Label } from './Label';
 import { Input } from './Input';
 import { FormEvent } from 'react';
+import { HiliteGrid } from './HiliteGrid';
 
 function Contact() {
   const handleSubmit = (e: FormEvent) => {
@@ -19,51 +20,54 @@ function Contact() {
           <UserPen className="hidden md:block" size={48} /> Contact
         </h1>
       </Link>
-      <p className="text-18">
-        Email me at{' '}
-        <a className="cursor-pointer text-gold hover:text-gold/80">
-          hello@fmweb.dev
-        </a>{' '}
-        or send me a message on{' '}
-        <a
-          className="cursor-pointer text-gold hover:text-gold/80"
-          href="https://www.linkedin.com/in/frankiedenell/"
-        >
-          LinkedIn
-        </a>
-        .
-      </p>
-      <form className="my-10" onSubmit={handleSubmit}>
-        <div className="mb-6 flex flex-col space-y-2 md:flex-row md:space-x-4 md:space-y-0">
-          <LabelInputContainer>
-            <Label htmlFor="firstname">First name</Label>
-            <Input id="firstname" placeholder="Beatrix" type="text" />
+      <HiliteGrid>
+        <p className="mb-10 text-16 leading-none tracking-normal md:text-18 md:tracking-wider">
+          Email me at{' '}
+          <a className="cursor-pointer text-gold hover:text-gold/80">
+            hello@fmweb.dev
+          </a>{' '}
+          or send me a message on{' '}
+          <a
+            className="cursor-pointer text-gold hover:text-gold/80"
+            href="https://www.linkedin.com/in/frankiedenell/"
+          >
+            LinkedIn
+          </a>
+          .
+        </p>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-6 flex flex-col space-y-6 md:flex-row md:space-x-4 md:space-y-0">
+            <LabelInputContainer>
+              <Label htmlFor="firstname">First name</Label>
+              <Input id="firstname" placeholder="Beatrix" type="text" />
+            </LabelInputContainer>
+            <LabelInputContainer>
+              <Label htmlFor="lastname">Last name</Label>
+              <Input id="lastname" placeholder="Kiddo" type="text" />
+            </LabelInputContainer>
+          </div>
+          <LabelInputContainer className="mb-6">
+            <Label htmlFor="email">Email Address</Label>
+            <Input id="email" placeholder="thebride@kb.com" type="email" />
           </LabelInputContainer>
-          <LabelInputContainer>
-            <Label htmlFor="lastname">Last name</Label>
-            <Input id="lastname" placeholder="Kiddo" type="text" />
+          <LabelInputContainer className="mb-6">
+            <Label htmlFor="password">Message</Label>
+            <Input
+              id="message"
+              placeholder="Clark Kent is Superman's critique on the whole human race."
+              type="password"
+            />
           </LabelInputContainer>
-        </div>
-        <LabelInputContainer className="mb-6">
-          <Label htmlFor="email">Email Address</Label>
-          <Input id="email" placeholder="thebride@kb.com" type="email" />
-        </LabelInputContainer>
-        <LabelInputContainer className="mb-6">
-          <Label htmlFor="password">Message</Label>
-          <Input
-            id="message"
-            placeholder="Clark Kent is Superman's critique on the whole human race."
-            type="password"
-          />
-        </LabelInputContainer>
-        <button
-          className="group/btn relative mt-12 block h-12 w-full rounded-md font-medium uppercase text-lighter shadow-[0px_0px_1px_1px_var(--dark)]"
-          type="submit"
-        >
-          Submit
-          <BottomGradient />
-        </button>
-      </form>
+
+          <button
+            className="group/btn relative mt-10 block h-12 w-full rounded-md bg-darkest font-medium uppercase text-lighter shadow-[0px_0px_1px_1px_var(--dark)]"
+            type="submit"
+          >
+            Submit
+            <BottomGradient />
+          </button>
+        </form>
+      </HiliteGrid>
     </section>
   );
 }

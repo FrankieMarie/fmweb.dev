@@ -4,7 +4,7 @@ import { Link } from '@tanstack/react-router';
 
 function Projects() {
   return (
-    <section id="projects" className="mt-40">
+    <section id="projects" className="mt-20 md:mt-40">
       <Link className="mb-4 block w-max md:mb-8" hash="projects">
         <h1 className="flex w-max items-center gap-2 font-dank text-32 font-semibold text-gold hover:text-gold/80 md:text-48">
           <CodeXml className="block md:hidden" size={32} />

@@ -21,7 +21,11 @@ module.exports = {
         lightest: '#dee2e6'
       },
       screens: {
+        2500: '2500px',
+        2200: '2200px',
+        2000: '2000px',
         nav: '1920px',
+        1800: '1800px',
         content: '1280px',
         500: '500px',
         xs: '450px',
@@ -36,6 +40,7 @@ module.exports = {
         14: '.875rem',
         16: '1rem',
         18: '1.125rem',
+        20: '1.25',
         22: '1.375rem',
         24: '1.5rem',
         28: '1.75rem',

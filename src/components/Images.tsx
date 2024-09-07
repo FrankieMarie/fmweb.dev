@@ -14,7 +14,7 @@ function Images() {
   const images = [Kayak, Stumps, Rena, Sharky, PaintRiver, PC, Railroad];
 
   return (
-    <section className="mb-4">
+    <section>
       <div className="mask flex w-full overflow-hidden" ref={boxRef}>
         <motion.div className="inline-flex" drag="x" dragConstraints={boxRef}>
           {images.map((image, i) => (

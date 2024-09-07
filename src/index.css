@@ -24,6 +24,13 @@ html,
   border: none;
 }
 
+.glitch-container {
+  display: flex;
+  width: full;
+
+  resize: both;
+}
+
 .glitch {
   font-weight: 700;
   text-transform: uppercase;

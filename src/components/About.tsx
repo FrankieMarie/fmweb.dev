@@ -10,12 +10,13 @@ function About() {
           <Crown className="hidden md:block" size={48} /> About
         </h1>
       </Link>
-      <p className="mb-10 text-32 text-light">
+      <p className="mb-20 text-22 tracking-wide text-light md:text-28 lg:text-32">
         I am a web developer from the Upper Peninsula of Michigan. I specialize
         in building front end web applications with a focus on design,
         semantics, accessibility, and user experience. I have been working with
-        TypeScript and modern web frameworks professionally for over 6 years. I
-        particularly enjoy writing CSS and making things fun to interact with.
+        HTML, CSS, TypeScript, and modern web frameworks professionally for
+        several years. I particularly enjoy writing CSS and making things fun to
+        interact with.
       </p>
     </section>
   );

@@ -5,12 +5,13 @@ import { Link } from '@tanstack/react-router';
 function Projects() {
   return (
     <section id="projects" className="mt-40">
-      <Link className="mb-8 block w-max" hash="projects">
-        <h1 className="text-48 flex w-max items-center gap-2 font-dank font-semibold text-gold hover:text-gold/80">
-          <CodeXml size={48} /> Projects
+      <Link className="mb-4 block w-max md:mb-8" hash="projects">
+        <h1 className="flex w-max items-center gap-2 font-dank text-32 font-semibold text-gold hover:text-gold/80 md:text-48">
+          <CodeXml className="block md:hidden" size={32} />
+          <CodeXml className="hidden md:block" size={48} /> Projects
         </h1>
       </Link>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
         <AnimatedBackground
           className="rounded-lg bg-darker"
           enableHover
@@ -76,17 +77,11 @@ const PROJECTS = [
     title: 'React Memory Game',
     description:
       'A simple memory game built with React and Vite, hosted with Azure Static Web Apps and automatic deployment with GitHub Actions.',
+    link: 'https://gentle-grass-0c705c61e.5.azurestaticapps.net/',
     github: 'https://github.com/FrankieMarie/memory-game'
   },
   {
     id: 4,
-    title: 'Fullstack Playground',
-    description:
-      'A fullstack React + Hono app where I experiment with tools I am interested in. Uses a SQLite DB with fullstack type safety.',
-    github: 'https://github.com/FrankieMarie/react-playground'
-  },
-  {
-    id: 5,
     title: 'FM Web Dev',
     description:
       'My personal website. Built with React, Framer Motion, Three.js, and Tailwind. Constantly evolving, perpetually improving.',

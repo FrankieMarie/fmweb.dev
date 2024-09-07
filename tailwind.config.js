@@ -1,7 +1,13 @@
-/** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
+const {
+  default: flattenColorPalette
+} = require('tailwindcss/lib/util/flattenColorPalette');
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -17,7 +23,9 @@ module.exports = {
       screens: {
         nav: '1920px',
         content: '1280px',
-        xs: '450px'
+        500: '500px',
+        xs: '450px',
+        xxs: '425px'
       },
       fontFamily: {
         dank: ['Dank', 'monospace']
@@ -35,9 +43,26 @@ module.exports = {
         48: '3rem',
         64: '4rem',
         80: '5rem',
+        100: '6.25rem',
         128: '8rem'
       }
     }
   },
-  plugins: ['prettier-plugin-tailwindcss']
+  plugins: [
+    'prettier-plugin-tailwindcss',
+    require('tailwind-scrollbar'),
+    addVariablesForColors
+  ]
 };
+
+// This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
+function addVariablesForColors({ addBase, theme }) {
+  let allColors = flattenColorPalette(theme('colors'));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+
+  addBase({
+    ':root': newVars
+  });
+}

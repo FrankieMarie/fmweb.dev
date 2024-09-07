@@ -11,6 +11,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        lightGreen: '#dce775',
         gold: '#fcbf49',
         darkest: '#212529',
         darker: '#343a40',
@@ -50,6 +51,9 @@ module.exports = {
         80: '5rem',
         100: '6.25rem',
         128: '8rem'
+      },
+      boxShadow: {
+        input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`
       },
       animation: {
         'meteor-effect': 'meteor 5s linear infinite'

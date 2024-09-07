@@ -16,7 +16,7 @@ const Stars = () => {
   > | null>(null);
 
   const generateStars = () =>
-    random.inSphere(new Float32Array(250), {
+    random.inSphere(new Float32Array(150), {
       radius: 1.2
     }) as Float32Array;
 

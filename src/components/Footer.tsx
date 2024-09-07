@@ -4,7 +4,7 @@ import { LinkedIn } from '../assets/SVGs/LinkedIn';
 export const Footer = () => {
   return (
     <footer className="relative z-10 mt-40">
-      <div className="mx-auto flex h-24 w-full max-w-screen-nav items-center justify-between px-10">
+      <div className="mx-auto flex h-24 w-full max-w-screen-content items-center justify-between px-10 md:px-0">
         <div className="flex items-center gap-2 text-14">
           <div className="flex items-baseline">
             <span className="font-bold text-gold">FM</span>

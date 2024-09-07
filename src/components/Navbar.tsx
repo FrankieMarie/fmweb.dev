@@ -8,11 +8,11 @@ function Navbar() {
 
   return (
     <nav
-      className={`sticky top-0 z-40 mx-auto flex h-24 w-full items-center border-none px-10 transition-all ${
+      className={`top-0 z-40 mx-auto flex h-24 w-full items-center border-none px-10 transition-all ${
         scrolled ? 'backdrop-blur-sm' : 'bg-transparent'
       } `}
     >
-      <div className="mx-auto flex w-full max-w-screen-nav items-center justify-between">
+      <div className="mx-auto flex w-full max-w-screen-content items-center justify-between">
         <Logo />
         <div className="flex items-center gap-6 text-center">
           <a href="https://github.com/FrankieMarie" target="_blank">

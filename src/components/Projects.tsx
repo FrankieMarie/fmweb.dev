@@ -22,7 +22,7 @@ function Projects() {
           }}
         >
           {PROJECTS.map((project, index) => (
-            <div key={index} data-id={`card-${index}`}>
+            <div key={index} data-id={`card-${index}`} className="relative">
               <div className="flex select-none flex-col space-y-1 p-4">
                 <h3 className="text-18 font-medium">{project.title}</h3>
                 <p className="text-16 text-light">{project.description}</p>

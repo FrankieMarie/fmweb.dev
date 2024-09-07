@@ -1,6 +1,6 @@
 import { useScroll } from '../hooks/useScroll';
-import { Github } from '../assets/SVGs/Github';
-import { LinkedIn } from '../assets/SVGs/LinkedIn';
+import { Github } from './SVGs/Github';
+import { LinkedIn } from './SVGs/LinkedIn';
 import { Logo } from './Logo';
 
 function Navbar() {

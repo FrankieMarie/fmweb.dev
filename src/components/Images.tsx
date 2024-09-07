@@ -1,13 +1,13 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { MoveHorizontal } from 'lucide-react';
-import Kayak from '../assets/images/kayak.webp';
-import PaintRiver from '../assets/images/paint-river.webp';
-import PC from '../assets/images/pc.webp';
-import Railroad from '../assets/images/railroad-lake.webp';
-import Rena from '../assets/images/rena.webp';
-import Sharky from '../assets/images/sharky.webp';
-import Stumps from '../assets/images/stumps.webp';
+import Kayak from '/assets/images/kayak.webp';
+import PaintRiver from '/assets/images/paint-river.webp';
+import PC from '/assets/images/pc.webp';
+import Railroad from '/assets/images/railroad-lake.webp';
+import Rena from '/assets/images/rena.webp';
+import Sharky from '/assets/images/sharky.webp';
+import Stumps from '/assets/images/stumps.webp';
 
 function Images() {
   const boxRef = useRef(null);
@@ -25,6 +25,7 @@ function Images() {
               <img
                 className="pointer-events-none h-full w-full rounded-br-3xl rounded-tl-3xl object-cover"
                 src={image}
+                loading="lazy"
                 alt=""
               />
             </div>

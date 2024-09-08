@@ -10,7 +10,10 @@ export const Route = createRootRoute({
 
 function Root() {
   return (
-    <main className="relative bg-darkest text-lightest selection:bg-gold selection:text-darkest">
+    <main
+      id="top"
+      className="relative bg-darkest text-lightest selection:bg-gold selection:text-darkest"
+    >
       <Navbar />
       <StarsCanvas />
       <StarsBackground />

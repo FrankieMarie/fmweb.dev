@@ -21,7 +21,7 @@ function Contact() {
         </h1>
       </Link>
       <HiliteGrid>
-        <p className="mb-10 text-16 leading-none tracking-normal md:text-18 md:tracking-wider">
+        <p className="mb-10 text-16 leading-normal tracking-normal md:text-18 md:leading-none md:tracking-wider">
           Email me at{' '}
           <a className="cursor-pointer text-gold hover:text-gold/80">
             hello@fmweb.dev

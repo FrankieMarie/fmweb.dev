@@ -11,7 +11,7 @@ import Stumps from '/assets/images/stumps.webp';
 
 function Images() {
   const boxRef = useRef(null);
-  const images = [Kayak, Stumps, Rena, Sharky, PaintRiver, PC, Railroad];
+  const images = [Stumps, Kayak, Rena, Sharky, PaintRiver, PC, Railroad];
 
   return (
     <section>

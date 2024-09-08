@@ -47,6 +47,7 @@ function Projects() {
                     <a
                       className="text-gold hover:text-gold/80"
                       href={project.link}
+                      target="_blank"
                     >
                       <SquareArrowOutUpRight size={18} />
                     </a>
@@ -55,6 +56,7 @@ function Projects() {
                     <a
                       className="text-gold hover:text-gold/80"
                       href={project.github}
+                      target="_blank"
                     >
                       <Github size={18} />
                     </a>

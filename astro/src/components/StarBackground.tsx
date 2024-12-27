@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef, RefObject, useCallback } from 'react';
-import { cn } from '../utils';
+import { type RefObject, useState, useEffect, useRef } from 'react';
 
 interface StarProps {
   x: number;
@@ -15,7 +14,6 @@ interface StarBackgroundProps {
   twinkleProbability?: number;
   minTwinkleSpeed?: number;
   maxTwinkleSpeed?: number;
-  className?: string;
 }
 
 export const StarsBackground: React.FC<StarBackgroundProps> = ({
@@ -23,15 +21,16 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
   allStarsTwinkle = true,
   twinkleProbability = 0.7,
   minTwinkleSpeed = 0.5,
-  maxTwinkleSpeed = 1,
-  className
+  maxTwinkleSpeed = 1
 }) => {
   const [stars, setStars] = useState<StarProps[]>([]);
-  const canvasRef: RefObject<HTMLCanvasElement> =
+  const canvasRef: RefObject<HTMLCanvasElement | null> =
     useRef<HTMLCanvasElement>(null);
 
-  const generateStars = useCallback(
-    (width: number, height: number): StarProps[] => {
+  useEffect(() => {
+    const canvas = canvasRef.current;
+
+    const generateStars = (width: number, height: number): StarProps[] => {
       const area = width * height;
       const numStars = Math.floor(area * starDensity);
       return Array.from({ length: numStars }, () => {
@@ -48,20 +47,10 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
             : null
         };
       });
-    },
-    [
-      starDensity,
-      allStarsTwinkle,
-      twinkleProbability,
-      minTwinkleSpeed,
-      maxTwinkleSpeed
-    ]
-  );
+    };
 
-  useEffect(() => {
     const updateStars = () => {
-      if (canvasRef.current) {
-        const canvas = canvasRef.current;
+      if (canvas) {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
@@ -73,15 +62,15 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
     };
 
     updateStars();
-
     const resizeObserver = new ResizeObserver(updateStars);
-    if (canvasRef.current) {
-      resizeObserver.observe(canvasRef.current);
+
+    if (canvas) {
+      resizeObserver.observe(canvas);
     }
 
     return () => {
-      if (canvasRef.current) {
-        resizeObserver.unobserve(canvasRef.current);
+      if (canvas) {
+        resizeObserver.unobserve(canvas);
       }
     };
   }, [
@@ -89,8 +78,7 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
     allStarsTwinkle,
     twinkleProbability,
     minTwinkleSpeed,
-    maxTwinkleSpeed,
-    generateStars
+    maxTwinkleSpeed
   ]);
 
   useEffect(() => {
@@ -127,10 +115,5 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
     };
   }, [stars]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className={cn('absolute inset-0 h-full w-full', className)}
-    />
-  );
+  return <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />;
 };

@@ -1,0 +1,29 @@
+---
+import { Codepen } from '../assets/Codepen';
+import { Github } from '../assets/Github';
+import { LinkedIn } from '../assets/LinkedIn';
+import { Logo } from './Logo';
+---
+
+<nav class="mx-auto flex h-24 w-full items-center border-none px-10">
+  <div
+    class="mx-auto flex w-full max-w-screen-content items-center justify-between"
+  >
+    <Logo />
+    <div class="flex items-center gap-6 text-center">
+      <a class="z-20" href="https://github.com/FrankieMarie" target="_blank">
+        <Github />
+      </a>
+      <a class="z-20" href="https://codepen.io/frankiemarie" target="_blank">
+        <Codepen />
+      </a>
+      <a
+        class="z-20"
+        href="https://www.linkedin.com/in/frankiedenell/"
+        target="_blank"
+      >
+        <LinkedIn />
+      </a>
+    </div>
+  </div>
+</nav>

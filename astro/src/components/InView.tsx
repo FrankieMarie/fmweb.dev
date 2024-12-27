@@ -1,10 +1,10 @@
-import { ReactNode, useRef } from 'react';
+import { type ReactNode, useRef } from 'react';
 import {
   motion,
   useInView,
-  Variant,
-  Transition,
-  UseInViewOptions
+  type Variant,
+  type Transition,
+  type UseInViewOptions
 } from 'framer-motion';
 
 interface InViewProps {

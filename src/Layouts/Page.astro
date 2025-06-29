@@ -1,0 +1,65 @@
+---
+const backgroundColor = "#313037";
+const textColorLightest = "#FAFAFA";
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend+Giga:wght@100..900&family=Lexend:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global define:vars={{ backgroundColor, textColorLightest }}>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+  html {
+    height: 100%;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--backgroundColor);
+    color: var(--textColorLightest);
+    font-family: "Lexend", sans-serif;
+    font-weight: 300;
+  }
+
+  p,
+  a,
+  li,
+  div,
+  span,
+  label,
+  input,
+  textarea {
+    letter-spacing: 0.5px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Lexend Giga", sans-serif;
+    font-weight: 800;
+  }
+</style>

@@ -1,0 +1,24 @@
+---
+import { Megaphone } from "@lucide/astro";
+---
+
+<style>
+  .banner {
+    background: linear-gradient(90deg, var(--gold-dark) 0%, var(--gold) 25%, var(--gold) 65%, var(--gold-light) 100%);
+    padding: var(--size-12);
+    color: var(--bg);
+    font-size: var(--size-14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--size-8);
+    svg {
+      color: var(--bg);
+      width: var(--size-18);
+    }
+ }
+</style>
+
+<div class="banner">
+  <Megaphone/> <p>Available for freelance and contract work</p>
+</div>

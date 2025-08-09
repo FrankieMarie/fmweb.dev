@@ -2,13 +2,16 @@
   .stars {
     position: absolute;
     inset: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     pointer-events: none;
   }
 </style>
 
-<canvas class="stars">
+<script src="./parallax-bg.ts">
+</script>
+
+<canvas class="stars" data-speed=".4">
   Your browser does not support the HTML canvas tag.
 </canvas>
 
@@ -17,7 +20,7 @@
     const canvas = document.currentScript.previousElementSibling;
     if (!canvas) return;
 
-    const starDensity = 0.00005;
+    const starDensity = 0.00015;
     const allStarsTwinkle = true;
     const twinkleProbability = 0.75;
     const minTwinkleSpeed = 0.75;

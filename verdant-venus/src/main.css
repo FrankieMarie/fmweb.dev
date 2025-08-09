@@ -1,5 +1,5 @@
 :root {
-  --bg: #0E100F;
+  --bg: #0e100f;
   --white: #fffce1;
   --gold: #fcbf49;
   --gold-dark: #b8860b;  
@@ -26,6 +26,11 @@
 * {
   padding: 0;
   margin: 0;
+}
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 

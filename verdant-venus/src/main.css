@@ -1,6 +1,6 @@
 :root {
   --bg: #0e100f;
-  --white: #fffce1;
+  --white: rgba(255, 252, 225, .85);
   --gold: #fcbf49;
   --gold-dark: #b8860b;  
   --gold-light: #ffe8b3; 

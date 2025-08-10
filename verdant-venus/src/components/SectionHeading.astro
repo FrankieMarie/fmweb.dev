@@ -1,0 +1,19 @@
+---
+type Props = {
+  text: string;
+  style: Record<string, string | number>;
+}
+
+const { text, style } = Astro.props
+---
+
+<style>
+  .h1 {
+    text-transform: uppercase;
+    color: var(--grey);
+    letter-spacing: .25em;
+    font-weight: 400;
+  }
+</style>
+
+<h1 class="h1" style={style}>{text}</h1>

@@ -1,15 +1,27 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+---
+
 <style>
   .contact {
     height: calc(100vh - 7.75rem);
     display: flex;
-    align-items: baseline;
-    justify-content: center;
-
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
     padding-bottom: 8rem;
   }
 
+  .form {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    width: 100%;
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
   .glowing-btn {
-    align-self: flex-end;
     position: relative;
     color: var(--gold);
     cursor: pointer;
@@ -205,6 +217,12 @@
 </style> 
 
 <section class="content-container contact">
+  <SectionHeading text="Contact" style={{'margin': '8rem 0 4rem 0'}}/>
+  <form class="form">
+    <input name="name" autocomplete="name" placeholder="Name"/>
+    <input name="email" autocomplete="email" placeholder="Email"/>
+    <textarea name="message" placeholder="Message"/>
+  </form>
   <button class='glowing-btn'>
     <span class='glowing-txt'>S<span class='faulty-letter'>E</span>ND</span>
   </button>

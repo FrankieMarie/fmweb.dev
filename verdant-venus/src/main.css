@@ -112,3 +112,15 @@ li, a {
     }
   }
 }
+
+input, textarea {
+  background-color: transparent;
+  border: solid 1px var(--grey);
+  border-radius: 0.45em;
+  padding: 1rem .5rem;
+  color: var(--white);
+  font-size: 1.25rem;
+  :focus, :focus-visible, :focus-within {
+    outline: solid 2px var(--gold);
+  }
+}

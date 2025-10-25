@@ -21,6 +21,16 @@ import SectionHeading from "./SectionHeading.astro";
     margin-bottom: 4rem;
   }
 
+  .input-field {
+    border: 1px solid var(--grey);
+    padding: 1rem;
+  }
+
+  .input-field:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+
   .glowing-btn {
     position: relative;
     color: var(--gold);
@@ -216,12 +226,12 @@ import SectionHeading from "./SectionHeading.astro";
 
 </style> 
 
-<section class="content-container contact">
+<section class="content-container contact" id="contact">
   <SectionHeading text="Contact" style={{'margin': '8rem 0 4rem 0'}}/>
   <form class="form">
-    <input name="name" autocomplete="name" placeholder="Name"/>
-    <input name="email" autocomplete="email" placeholder="Email"/>
-    <textarea name="message" placeholder="Message"/>
+    <input class="input-field" name="name" autocomplete="name" placeholder="Name"/>
+    <input class="input-field" name="email" autocomplete="email" placeholder="Email"/>
+    <textarea class="input-field" name="message" placeholder="Message"/>
   </form>
   <button class='glowing-btn'>
     <span class='glowing-txt'>S<span class='faulty-letter'>E</span>ND</span>

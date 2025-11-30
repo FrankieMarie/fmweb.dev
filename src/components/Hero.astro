@@ -1,60 +1,41 @@
 ---
 import { ArrowDown } from "@lucide/astro";
-import SectionHeading from "./SectionHeading.astro";
 ---
 
 <style>
   .hero {
-    height: calc(100vh - 7.75rem);
+    height: calc(100vh - 3.25rem);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
   }
 
   .heading {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     height: 100%;
-    width: 100%;
-  }
-
-  .h1 {
-    margin-bottom: 2rem;
   }
 
   .heading-text {
-    color: var(--white);
     text-transform: uppercase;
-    width: 100%;
-    font-size: clamp(3rem, 5vw, 15rem);
-    font-weight: 900;
-    letter-spacing: .025em;
-    text-align: center;
+    text-align: right;
   }
 
   .heading-subtext {
-    font-size: clamp(1rem, 2vw, 2rem);
-    text-align: center;
-    color: var(--grey);
-
-  }
-
-  .scramble-typewriter {
-    font-weight: 200;
-    color: var(--grey);
-    letter-spacing: .15em;
     text-transform: uppercase;
+    text-align: right;
   }
 
   .cta-text {
-    font-weight: 200;
+    font-weight: 500;
     color: var(--grey);
     letter-spacing: .15em;
     text-transform: uppercase;
-    font-size: .85rem;
+    font-size: .75rem;
+    margin-bottom: 1rem;
   } 
 
   .cta-btn {
@@ -71,16 +52,12 @@ import SectionHeading from "./SectionHeading.astro";
   }
 </style> 
 
-<script src="./scramble-type.ts"></script>
-
 <section class="content-container hero">
   <div class="heading">
     <h1 class="heading-text">
-      Hi, I'm{' '}
-      <span class="blink-text">FR<span class="faulty-letter">A</span>NKIE</span>
+      <span class="fm">FM</span><span class="web">Web</span><span class="dev">Dev</span>
     </h1>
-    <p class="heading-subtext">I build websites and web applications</p>
+    <p class="heading-subtext">Interactive web design and development</p>
   </div>
   <span class="cta-text">Discover More</span>
-  <a href="#about" class="cta-btn"><ArrowDown/></a>  
 </section>

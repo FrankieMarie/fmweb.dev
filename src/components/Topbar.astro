@@ -1,0 +1,46 @@
+---
+import { Codepen } from "@lucide/astro";
+import { Github } from "@lucide/astro";
+import { Linkedin } from "@lucide/astro";
+---
+
+<style>
+  .nav {
+    padding: var(--size-16) 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    li {
+      height: 1.25rem;
+    }
+
+    a {
+      transition: color 0.25s ease-in-out;
+      color: var(--white);
+    }
+
+    .socials {
+      display: flex;
+      align-items: center;
+      height: 1.25rem;
+      gap: var(--size-32);
+
+      a:hover,
+      a:focus {
+        color: var(--gold);
+      }
+    }
+  }
+</style>
+
+<div class="content-container topbar">
+  <nav class="nav">
+    <ul class="socials">
+      <li><a href="https://codepen.io/fmwebdev"><Codepen width="20" height="20" /></a></li>
+      <li><a href="https://github.com/fmwebdev"><Github width="20" height="20" /></a></li>
+      <li><a href="https://www.linkedin.com/in/fmwebdev/"><Linkedin width="20" height="20" /></a></li>
+    </ul>
+  </nav>
+</div>
+

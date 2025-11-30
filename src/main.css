@@ -1,0 +1,55 @@
+:root {
+  --bg: #0b0c0c;
+  --white: #e9eaec;
+  --gold: #ffb606;
+  --grey: #505050;
+
+  /* Size scale */
+  --size-4: 0.25rem; /* 4px   */
+  --size-8: 0.5rem; /* 8px   */
+  --size-12: 0.75rem; /* 12px  */
+  --size-14: 0.875rem; /* 14px  */
+  --size-16: 1rem; /* 16px  */
+  --size-18: 1.125rem; /* 18px  */
+  --size-20: 1.25rem; /* 20px  */
+  --size-24: 1.5rem; /* 24px  */
+  --size-32: 2rem; /* 32px  */
+  --size-40: 2.5rem; /* 40px  */
+  --size-48: 3rem; /* 48px  */
+  --size-64: 4rem; /* 64px  */
+  --size-128: 8rem; /* 128px */
+}
+
+/* Global */
+* {
+  padding: 0;
+  margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--white);
+  font-family: "Noto Sans", sans-serif;
+}
+
+.content-container {
+  max-width: 120rem;
+  padding: 0 clamp(var(--size-24), 5vw, var(--size-64));
+  margin: 0 auto;
+}
+
+li,
+a {
+  list-style: none;
+  text-decoration: none;
+}

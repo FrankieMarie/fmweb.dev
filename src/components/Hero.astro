@@ -1,0 +1,232 @@
+---
+import { ArrowDown } from "@lucide/astro";
+---
+
+<style>
+  .hero {
+    height: calc(100vh - 3.25rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .heading-text {
+    text-transform: uppercase;
+    text-align: right;
+    font-size: clamp(48px, 10vw, 96px);
+    line-height: 1.1;
+    font-family: 'Portico', sans-serif;
+    font-weight: normal;
+  }
+
+  .fm,
+  .web,
+  .dev {
+    position: relative;
+    display: inline-block;
+    cursor: default;
+  }
+
+  .fm {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--grey);
+    text-stroke: 1px var(--grey);
+  }
+
+  .fm::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--gold);
+    text-stroke: 1px var(--gold);
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(
+      circle var(--radius, 0px) at var(--x, -100px) var(--y, -100px),
+      rgba(0, 0, 0, var(--opacity, 0)) 70%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      circle var(--radius, 0px) at var(--x, -100px) var(--y, -100px),
+      rgba(0, 0, 0, var(--opacity, 0)) 70%,
+      transparent 100%
+    );
+  }
+
+  .web,
+  .dev {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--grey);
+    text-stroke: 1px var(--grey);
+  }
+
+  .web::before,
+  .dev::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--white);
+    text-stroke: 1px var(--white);
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(
+      circle var(--radius, 0px) at var(--x, -100px) var(--y, -100px),
+      rgba(0, 0, 0, var(--opacity, 0)) 70%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      circle var(--radius, 0px) at var(--x, -100px) var(--y, -100px),
+      rgba(0, 0, 0, var(--opacity, 0)) 70%,
+      transparent 100%
+    );
+  }
+
+  .heading-subtext {
+    text-transform: uppercase;
+    text-align: right;
+    padding: .5rem 0;
+    font-size: 1rem;
+  }
+
+  .cta-text {
+    color: var(--grey);
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    font-size: .75rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 9999px;
+    transition: color 0.25s ease-in-out;
+
+    &:hover,
+    &:focus {
+      color: var(--gold);
+    }
+  } 
+
+  @media (max-width: 930px) {
+    .heading-subtext {
+      font-size: 0.875rem;
+    }
+  }
+
+  @media (max-width: 675px) {
+    .heading {
+      align-items: center;
+    }
+
+    .heading-subtext {
+      font-size: 0.75rem;
+      text-align: center;
+    }
+  }
+</style>
+
+<script>
+  // Optimized paint effect
+  const heading = document.querySelector('.heading-text');
+  const elements = Array.from(document.querySelectorAll('.fm, .web, .dev')) as HTMLElement[];
+  
+  if (heading && elements.length) {
+    const states = elements.map(() => ({ 
+      currOpacity: 0, 
+      targetOpacity: 0,
+      currRadius: 0,
+      targetRadius: 0,
+      hasEntered: false
+    }));
+    const MAX_RADIUS = 125;
+    const LERP_OPACITY = 0.2;
+    const LERP_RADIUS = 0.25;
+    let rafId = 0;
+    
+    const animate = () => {
+      let needsUpdate = false;
+      
+      elements.forEach((el, i) => {
+        const s = states[i];
+        
+        // Animate opacity
+        if (Math.abs(s.targetOpacity - s.currOpacity) > 0.01) {
+          s.currOpacity += (s.targetOpacity - s.currOpacity) * LERP_OPACITY;
+          el.style.setProperty('--opacity', s.currOpacity.toFixed(3));
+          needsUpdate = true;
+        }
+        
+        // Animate radius growth
+        if (Math.abs(s.targetRadius - s.currRadius) > 0.5) {
+          s.currRadius += (s.targetRadius - s.currRadius) * LERP_RADIUS;
+          el.style.setProperty('--radius', `${s.currRadius}px`);
+          needsUpdate = true;
+        }
+      });
+      
+      rafId = needsUpdate ? requestAnimationFrame(animate) : 0;
+    };
+    
+    heading.addEventListener('mousemove', (e) => {
+      const { clientX, clientY } = e as MouseEvent;
+      
+      elements.forEach((el, i) => {
+        const { left, top, width, height } = el.getBoundingClientRect();
+        const x = clientX - left;
+        const y = clientY - top;
+        const s = states[i];
+        
+        const isNear = x >= -MAX_RADIUS && x <= width + MAX_RADIUS && 
+                       y >= -MAX_RADIUS && y <= height + MAX_RADIUS;
+        
+        if (isNear) {
+          // Update cursor position
+          el.style.setProperty('--x', `${x}px`);
+          el.style.setProperty('--y', `${y}px`);
+          
+          // On first enter, start radius growth from 0
+          if (!s.hasEntered) {
+            s.hasEntered = true;
+            s.currRadius = 0;
+            s.targetRadius = MAX_RADIUS;
+          }
+          
+          s.targetOpacity = 1;
+        } else {
+          s.targetOpacity = 0;
+          s.targetRadius = 0;
+          s.hasEntered = false;
+        }
+      });
+      
+      if (!rafId) rafId = requestAnimationFrame(animate);
+    }, { passive: true });
+    
+    heading.addEventListener('mouseleave', () => {
+      states.forEach(s => {
+        s.targetOpacity = 0;
+        s.targetRadius = 0;
+        s.hasEntered = false;
+      });
+      if (!rafId) rafId = requestAnimationFrame(animate);
+    });
+  }
+</script> 
+
+<section class="content-container hero">
+  <div class="heading">
+    <h1 class="heading-text">
+      <span class="fm" data-text="FM">FM</span><span class="web" data-text="WEB">WEB</span><span class="dev" data-text="DEV">DEV</span>
+    </h1>
+    <p class="heading-subtext inter-200">Interactive web development and design</p>
+  </div>
+  <a class="cta-text inter-500" href="#about">Discover More</a>
+</section>

@@ -1,0 +1,134 @@
+---
+import { Codepen } from "@lucide/astro";
+import { Github } from "@lucide/astro";
+import { Linkedin } from "@lucide/astro";
+---
+
+<style>
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--size-24) var(--size-8) 0 var(--size-24);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.25s ease-in-out;
+      color: var(--grey);
+      border-radius: 9999px;
+      padding: 1rem; 
+    }
+
+    .socials {
+      display: flex;
+      align-items: center;
+      height: 1.25rem;
+      gap: var(--size-8);
+
+      a:hover,
+      a:focus {
+        color: var(--gold);
+      }
+    }
+  }
+
+  .typewriter {
+    display: inline-block;
+    color: var(--white);
+    font-size: .75rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+  }
+
+  .typewriter-char {
+    display: inline-block;
+    opacity: 0;
+    color: var(--white);
+  }
+
+</style>
+
+<div class="content-container topbar">
+  <p class="typewriter inter-200" id="typewriter-text"></p>
+  <nav class="nav">
+    <ul class="socials">
+      <li><a href="https://codepen.io/fmwebdev"><Codepen width="20" height="20" stroke-width="1.5" /></a></li>
+      <li><a href="https://github.com/fmwebdev"><Github width="20" height="20" stroke-width="1.5" /></a></li>
+      <li><a href="https://www.linkedin.com/in/fmwebdev/"><Linkedin width="20" height="20" stroke-width="1.5" /></a></li>
+    </ul>
+  </nav>
+</div>
+
+<script>
+  import { animate, stagger } from "motion";
+
+  const text = "Frankie Marie";
+  const container = document.getElementById('typewriter-text');
+  
+  if (container) {
+    // Function to run typewriter animation
+    const runTypewriter = () => {
+      // Clear container completely
+      container.innerHTML = '';
+      
+      // Create fresh character spans
+      const chars = text.split('').map(char => {
+        const span = document.createElement('span');
+        span.className = 'typewriter-char';
+        span.textContent = char === ' ' ? '\u00A0' : char;
+        span.style.opacity = '0';
+        return span;
+      });
+      
+      // Append characters
+      chars.forEach(char => container.appendChild(char));
+      
+      // Animate with slight delay
+      setTimeout(() => {
+        animate(
+          chars,
+          { opacity: 1 },
+          { 
+            delay: stagger(0.08),
+            duration: 0.001
+          }
+        );
+      }, 50);
+    };
+    
+    // Function to clear text
+    const clearText = () => {
+      container.innerHTML = '';
+    };
+    
+    // Intersection Observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            runTypewriter();
+          } else {
+            clearText();
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    
+    observer.observe(container);
+    
+    // Run initially
+    runTypewriter();
+  }
+</script>
+

@@ -38,8 +38,8 @@ import { ArrowDown } from "@lucide/astro";
 
   .fm {
     color: transparent;
-    -webkit-text-stroke: 1px var(--gold);
-    text-stroke: 1px var(--gold);
+    -webkit-text-stroke: 1px var(--grey);
+    text-stroke: 1px var(--grey);
   }
 
   .fm::before {
@@ -47,17 +47,17 @@ import { ArrowDown } from "@lucide/astro";
     position: absolute;
     left: 0;
     top: 0;
-    color: var(--gold);
-    -webkit-text-stroke: 0;
-    -webkit-text-fill-color: var(--gold);
+    color: transparent;
+    -webkit-text-stroke: 1px var(--gold);
+    text-stroke: 1px var(--gold);
     pointer-events: none;
     -webkit-mask-image: radial-gradient(
-      circle 150px at var(--x, -100px) var(--y, -100px),
+      circle var(--radius, 0px) at var(--x, -100px) var(--y, -100px),
       rgba(0, 0, 0, var(--opacity, 0)) 70%,
       transparent 100%
     );
     mask-image: radial-gradient(
-      circle 150px at var(--x, -100px) var(--y, -100px),
+      circle var(--radius, 0px) at var(--x, -100px) var(--y, -100px),
       rgba(0, 0, 0, var(--opacity, 0)) 70%,
       transparent 100%
     );
@@ -66,8 +66,8 @@ import { ArrowDown } from "@lucide/astro";
   .web,
   .dev {
     color: transparent;
-    -webkit-text-stroke: 1px var(--white);
-    text-stroke: 1px var(--white);
+    -webkit-text-stroke: 1px var(--grey);
+    text-stroke: 1px var(--grey);
   }
 
   .web::before,
@@ -76,17 +76,17 @@ import { ArrowDown } from "@lucide/astro";
     position: absolute;
     left: 0;
     top: 0;
-    color: var(--white);
-    -webkit-text-stroke: 0;
-    -webkit-text-fill-color: var(--white);
+    color: transparent;
+    -webkit-text-stroke: 1px var(--white);
+    text-stroke: 1px var(--white);
     pointer-events: none;
     -webkit-mask-image: radial-gradient(
-      circle 150px at var(--x, -100px) var(--y, -100px),
+      circle var(--radius, 0px) at var(--x, -100px) var(--y, -100px),
       rgba(0, 0, 0, var(--opacity, 0)) 70%,
       transparent 100%
     );
     mask-image: radial-gradient(
-      circle 150px at var(--x, -100px) var(--y, -100px),
+      circle var(--radius, 0px) at var(--x, -100px) var(--y, -100px),
       rgba(0, 0, 0, var(--opacity, 0)) 70%,
       transparent 100%
     );
@@ -144,9 +144,16 @@ import { ArrowDown } from "@lucide/astro";
   const elements = Array.from(document.querySelectorAll('.fm, .web, .dev')) as HTMLElement[];
   
   if (heading && elements.length) {
-    const states = elements.map(() => ({ curr: 0, target: 0 }));
-    const BUFFER = 150;
-    const LERP = 0.2;
+    const states = elements.map(() => ({ 
+      currOpacity: 0, 
+      targetOpacity: 0,
+      currRadius: 0,
+      targetRadius: 0,
+      hasEntered: false
+    }));
+    const MAX_RADIUS = 125;
+    const LERP_OPACITY = 0.2;
+    const LERP_RADIUS = 0.25;
     let rafId = 0;
     
     const animate = () => {
@@ -154,9 +161,18 @@ import { ArrowDown } from "@lucide/astro";
       
       elements.forEach((el, i) => {
         const s = states[i];
-        if (Math.abs(s.target - s.curr) > 0.01) {
-          s.curr += (s.target - s.curr) * LERP;
-          el.style.setProperty('--opacity', s.curr.toFixed(3));
+        
+        // Animate opacity
+        if (Math.abs(s.targetOpacity - s.currOpacity) > 0.01) {
+          s.currOpacity += (s.targetOpacity - s.currOpacity) * LERP_OPACITY;
+          el.style.setProperty('--opacity', s.currOpacity.toFixed(3));
+          needsUpdate = true;
+        }
+        
+        // Animate radius growth
+        if (Math.abs(s.targetRadius - s.currRadius) > 0.5) {
+          s.currRadius += (s.targetRadius - s.currRadius) * LERP_RADIUS;
+          el.style.setProperty('--radius', `${s.currRadius}px`);
           needsUpdate = true;
         }
       });
@@ -171,19 +187,40 @@ import { ArrowDown } from "@lucide/astro";
         const { left, top, width, height } = el.getBoundingClientRect();
         const x = clientX - left;
         const y = clientY - top;
+        const s = states[i];
         
-        el.style.setProperty('--x', `${x}px`);
-        el.style.setProperty('--y', `${y}px`);
+        const isNear = x >= -MAX_RADIUS && x <= width + MAX_RADIUS && 
+                       y >= -MAX_RADIUS && y <= height + MAX_RADIUS;
         
-        states[i].target = (x >= -BUFFER && x <= width + BUFFER && 
-                           y >= -BUFFER && y <= height + BUFFER) ? 1 : 0;
+        if (isNear) {
+          // Update cursor position
+          el.style.setProperty('--x', `${x}px`);
+          el.style.setProperty('--y', `${y}px`);
+          
+          // On first enter, start radius growth from 0
+          if (!s.hasEntered) {
+            s.hasEntered = true;
+            s.currRadius = 0;
+            s.targetRadius = MAX_RADIUS;
+          }
+          
+          s.targetOpacity = 1;
+        } else {
+          s.targetOpacity = 0;
+          s.targetRadius = 0;
+          s.hasEntered = false;
+        }
       });
       
       if (!rafId) rafId = requestAnimationFrame(animate);
     }, { passive: true });
     
     heading.addEventListener('mouseleave', () => {
-      states.forEach(s => s.target = 0);
+      states.forEach(s => {
+        s.targetOpacity = 0;
+        s.targetRadius = 0;
+        s.hasEntered = false;
+      });
       if (!rafId) rafId = requestAnimationFrame(animate);
     });
   }

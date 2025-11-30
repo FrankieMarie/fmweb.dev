@@ -105,20 +105,15 @@ import { ArrowDown } from "@lucide/astro";
     text-transform: uppercase;
     font-size: .75rem;
     margin-bottom: 1rem;
-  } 
+    padding: 1rem;
+    border-radius: 9999px;
+    transition: color 0.25s ease-in-out;
 
-  .cta-btn {
-    margin: 1rem 0 2rem 0;
-    background: none;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--gold);
-    color: var(--bg);
-    border-radius: 4px;
-    padding: .15rem .25rem;
-  }
+    &:hover,
+    &:focus {
+      color: var(--gold);
+    }
+  } 
 
   @media (max-width: 930px) {
     .heading-subtext {
@@ -233,5 +228,5 @@ import { ArrowDown } from "@lucide/astro";
     </h1>
     <p class="heading-subtext inter-200">Interactive web development and design</p>
   </div>
-  <span class="cta-text inter-500">Discover More</span>
+  <a class="cta-text inter-500" href="#about">Discover More</a>
 </section>

@@ -22,15 +22,84 @@ import { ArrowDown } from "@lucide/astro";
   .heading-text {
     text-transform: uppercase;
     text-align: right;
+    font-size: clamp(48px, 10vw, 96px);
+    line-height: 1.1;
+    font-family: 'Portico', sans-serif;
+    font-weight: normal;
+  }
+
+  .fm,
+  .web,
+  .dev {
+    position: relative;
+    display: inline-block;
+    cursor: default;
+  }
+
+  .fm {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--gold);
+    text-stroke: 1px var(--gold);
+  }
+
+  .fm::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--gold);
+    -webkit-text-stroke: 0;
+    -webkit-text-fill-color: var(--gold);
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(
+      circle 150px at var(--x, -100px) var(--y, -100px),
+      rgba(0, 0, 0, var(--opacity, 0)) 70%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      circle 150px at var(--x, -100px) var(--y, -100px),
+      rgba(0, 0, 0, var(--opacity, 0)) 70%,
+      transparent 100%
+    );
+  }
+
+  .web,
+  .dev {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--white);
+    text-stroke: 1px var(--white);
+  }
+
+  .web::before,
+  .dev::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--white);
+    -webkit-text-stroke: 0;
+    -webkit-text-fill-color: var(--white);
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(
+      circle 150px at var(--x, -100px) var(--y, -100px),
+      rgba(0, 0, 0, var(--opacity, 0)) 70%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      circle 150px at var(--x, -100px) var(--y, -100px),
+      rgba(0, 0, 0, var(--opacity, 0)) 70%,
+      transparent 100%
+    );
   }
 
   .heading-subtext {
     text-transform: uppercase;
     text-align: right;
+    padding: .5rem 0;
+    font-size: 1rem;
   }
 
   .cta-text {
-    font-weight: 500;
     color: var(--grey);
     letter-spacing: .15em;
     text-transform: uppercase;
@@ -50,14 +119,82 @@ import { ArrowDown } from "@lucide/astro";
     border-radius: 4px;
     padding: .15rem .25rem;
   }
-</style> 
+
+  @media (max-width: 930px) {
+    .heading-subtext {
+      font-size: 0.875rem;
+    }
+  }
+
+  @media (max-width: 675px) {
+    .heading {
+      align-items: center;
+    }
+
+    .heading-subtext {
+      font-size: 0.75rem;
+      text-align: center;
+    }
+  }
+</style>
+
+<script>
+  // Optimized paint effect
+  const heading = document.querySelector('.heading-text');
+  const elements = Array.from(document.querySelectorAll('.fm, .web, .dev')) as HTMLElement[];
+  
+  if (heading && elements.length) {
+    const states = elements.map(() => ({ curr: 0, target: 0 }));
+    const BUFFER = 150;
+    const LERP = 0.2;
+    let rafId = 0;
+    
+    const animate = () => {
+      let needsUpdate = false;
+      
+      elements.forEach((el, i) => {
+        const s = states[i];
+        if (Math.abs(s.target - s.curr) > 0.01) {
+          s.curr += (s.target - s.curr) * LERP;
+          el.style.setProperty('--opacity', s.curr.toFixed(3));
+          needsUpdate = true;
+        }
+      });
+      
+      rafId = needsUpdate ? requestAnimationFrame(animate) : 0;
+    };
+    
+    heading.addEventListener('mousemove', (e) => {
+      const { clientX, clientY } = e as MouseEvent;
+      
+      elements.forEach((el, i) => {
+        const { left, top, width, height } = el.getBoundingClientRect();
+        const x = clientX - left;
+        const y = clientY - top;
+        
+        el.style.setProperty('--x', `${x}px`);
+        el.style.setProperty('--y', `${y}px`);
+        
+        states[i].target = (x >= -BUFFER && x <= width + BUFFER && 
+                           y >= -BUFFER && y <= height + BUFFER) ? 1 : 0;
+      });
+      
+      if (!rafId) rafId = requestAnimationFrame(animate);
+    }, { passive: true });
+    
+    heading.addEventListener('mouseleave', () => {
+      states.forEach(s => s.target = 0);
+      if (!rafId) rafId = requestAnimationFrame(animate);
+    });
+  }
+</script> 
 
 <section class="content-container hero">
   <div class="heading">
     <h1 class="heading-text">
-      <span class="fm">FM</span><span class="web">Web</span><span class="dev">Dev</span>
+      <span class="fm" data-text="FM">FM</span><span class="web" data-text="WEB">WEB</span><span class="dev" data-text="DEV">DEV</span>
     </h1>
-    <p class="heading-subtext">Interactive web design and development</p>
+    <p class="heading-subtext inter-200">Interactive web development and design</p>
   </div>
-  <span class="cta-text">Discover More</span>
+  <span class="cta-text inter-500">Discover More</span>
 </section>

@@ -14,7 +14,7 @@ import { ArrowDown } from "@lucide/astro";
   .heading {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
     height: 100%;
   }
@@ -104,10 +104,11 @@ import { ArrowDown } from "@lucide/astro";
     letter-spacing: .15em;
     text-transform: uppercase;
     font-size: .75rem;
-    margin-bottom: 1rem;
+    margin-bottom: 8rem;
     padding: 1rem;
     border-radius: 9999px;
-    transition: color 0.25s ease-in-out;
+    background: var(--bg);
+    transition: color 0.25s ease-in-out, opacity 0.2s ease;
 
     &:hover,
     &:focus {
@@ -219,14 +220,26 @@ import { ArrowDown } from "@lucide/astro";
       if (!rafId) rafId = requestAnimationFrame(animate);
     });
   }
-</script> 
+
+  // Hide Discover More after scrolling 200px
+  document.addEventListener('DOMContentLoaded', () => {
+    const cta = document.querySelector('.cta-text') as HTMLElement;
+    if (cta) {
+      window.addEventListener('scroll', () => {
+        const hidden = window.scrollY > 200;
+        cta.style.opacity = hidden ? '0' : '1';
+        cta.style.pointerEvents = hidden ? 'none' : 'auto';
+      }, { passive: true });
+    }
+  });
+</script>
 
 <section class="content-container hero">
   <div class="heading">
     <h1 class="heading-text">
       <span class="fm" data-text="FM">FM</span><span class="web" data-text="WEB">WEB</span><span class="dev" data-text="DEV">DEV</span>
     </h1>
-    <p class="heading-subtext inter-200">Interactive web development and design</p>
+    <p class="heading-subtext inter-200">Interactive web development</p>
   </div>
   <a class="cta-text inter-500" href="#about">Discover More</a>
 </section>

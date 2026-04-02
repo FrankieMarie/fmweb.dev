@@ -52,6 +52,12 @@ body {
   overflow-x: hidden;
 }
 
+main {
+  position: relative;
+  z-index: 1;
+}
+
+
 .inter-100 {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;

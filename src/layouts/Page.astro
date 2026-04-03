@@ -1,0 +1,23 @@
+---
+import BaseHead from '../components/shared/BaseHead.astro';
+import CustomCursor from '../components/shared/CustomCursor.astro';
+import Footer from '../components/shared/Footer.astro';
+import GridBackground from '../components/shared/GridBackground.astro';
+import Topbar from '../components/shared/Topbar.astro';
+const { title, description } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description}/>
+  </head>
+ <body>
+    <GridBackground />
+    <Topbar />
+    <main>
+      <slot/>
+    </main>
+    <Footer />
+    <CustomCursor />
+  </body>
+</html>

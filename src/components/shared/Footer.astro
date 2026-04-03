@@ -1,0 +1,27 @@
+<style>
+  footer {
+    color: var(--white);
+    font-size: .85rem;
+    font-family: "Atkinson", sans-serif;
+    text-align: center;
+    width: 100%;
+    padding-bottom: 1rem;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    a {
+      max-width: max-content;
+      justify-self: end;
+      padding: .5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+  }
+</style>
+
+<footer class="inter-200 content-container">
+  <div/>
+  <span>&copy; FM Web Dev &ndash; {new Date().getFullYear()}</span>
+  <a href="/blog">Blog</a>
+</footer>

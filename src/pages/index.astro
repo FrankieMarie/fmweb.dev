@@ -1,41 +1,10 @@
 ---
-import Topbar from "../components/Topbar.astro";
-import Hero from "../components/Hero.astro";
-import About from "../components/About.astro";
-import Projects from "../components/Projects.astro";
-import Contact from "../components/Contact.astro";
-import Footer from "../components/Footer.astro";
-import CustomCursor from "../components/CustomCursor.astro";
-import GridBackground from "../components/GridBackground.astro";
-// import StarsBackground from "../components/StarsBackground.astro";
-import "../main.css";
+import Page from "../layouts/Page.astro";
+import Hero from "../components/Home/Hero.astro";
+import About from "../components/Home/About.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="icon" type="image/svg+xml" href="/bolt.png" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>FMWebDev | Web Development and Design</title>
-  </head>
-  <body>
-    <GridBackground />
-    <main>
-      <Topbar />
-      <Hero />
-      <!-- <StarsBackground /> -->
-      <About />
-      <!-- <Projects />
-			<Contact /> -->
-      <Footer />
-    </main>
-    <CustomCursor />
-  </body>
-</html>
+<Page title="FM Web Dev" description="Interactive web development">
+  <Hero />
+  <About />
+</Page>

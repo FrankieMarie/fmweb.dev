@@ -26,25 +26,30 @@ const { post } = Astro.props;
     <p class="tags">{post.data.topics.map((topic) => topic).join(", ")}</p>
   </div>
 </a>
+
 <style>
   a {
-    display: block;
+    display: flex;
+    flex-direction: column;
     border-radius: 20px;
+    height: 100%;
     text-decoration: none;
-    color: var(--tan);
+    color: var(--white);
   }
 
   .title {
     padding: 16px 16px 0 16px;
-    color: var(--tan);
     background: rgba(255, 255, 255, 0.1);
     border-radius: 20px 20px 0 0;
+    width: 100%;
   }
 
   .summary {
     padding: 8px 16px 16px 16px;
     background: rgba(255, 255, 255, 0.1);
-    color: var(--tan-muted);
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: normal;
+    flex-grow: 1;
   }
 
   .post-data {
@@ -68,24 +73,5 @@ const { post } = Astro.props;
       border-radius: 0 0 20px 0;
       color: var(--yellow);
     }
-  }
-
-  /* Backward */
-  .hvr-backward {
-    width: 100%;
-    display: inline-block;
-    vertical-align: middle;
-    -webkit-transform: perspective(1px) translateZ(0);
-    transform: perspective(1px) translateZ(0);
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    -webkit-transition-property: transform;
-    transition-property: transform;
-  }
-  .hvr-backward:hover,
-  .hvr-backward:focus,
-  .hvr-backward:active {
-    -webkit-transform: translateX(-8px);
-    transform: translateX(-8px);
   }
 </style>

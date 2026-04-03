@@ -4,6 +4,9 @@ import type { CollectionEntry } from "astro:content";
 import BaseHead from "../components/shared/BaseHead.astro";
 import Footer from "../components/shared/Footer.astro";
 import FormattedDate from "../components/Blog/FormattedDate.astro";
+import Topbar from "../components/shared/Topbar.astro";
+import GridBackground from "../components/shared/GridBackground.astro";
+import CustomCursor from "../components/shared/CustomCursor.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
@@ -13,10 +16,35 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} />
-    <style></style>
+    <style>
+      .prose {
+        margin-top: 4rem;
+      }
+
+      .title {
+        margin-bottom: 2rem;
+      }
+
+      .date {
+        color: var(--grey);
+        margin-bottom: .5em;
+      }
+
+      hr {
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #ccc;
+        border-color: var(--grey);
+        margin: .5em 0;
+        padding: 0;
+      }
+    </style>
   </head>
 
   <body>
+    <GridBackground />
+    <Topbar />
     <main>
       <article>
         <div class="hero-image">
@@ -26,7 +54,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
             )
           }
         </div>
-        <div class="prose">
+        <div class="prose blog-container">
           <div class="title">
             <div class="date">
               <FormattedDate date={pubDate} />
@@ -46,5 +74,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
       </article>
     </main>
     <Footer />
+    <CustomCursor />
   </body>
 </html>

@@ -20,7 +20,6 @@
   --size-128: 8rem; /* 128px */
 }
 
-/* Global */
 * {
   padding: 0;
   margin: 0;
@@ -143,4 +142,5 @@ h4,
 h5,
 h6 {
   text-wrap: balance;
+  line-height: 1.25;
 }

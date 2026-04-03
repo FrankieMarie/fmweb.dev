@@ -1,16 +1,45 @@
 ---
+import { getCollection } from "astro:content";
+import BlogCard from "../../components/Blog/BlogCard.astro";
 import Page from "../../layouts/Page.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 ---
 
 <style>
-   p {
-      text-align: center;
-      margin: 8rem 0;
-   }
+  section {
+    margin: 4rem 0;
+  }
+
+  .blogs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr;
+    gap: 2rem;
+
+    li {
+      height: 100%;
+    }
+  }
 </style>
 
-<Page title="FM Web Blog" description="Mostly documentation for myself, but maybe it will help or intrest someone.">
-   <div class="blog-container">
-      <p>COMING SOON</p>
-   </div>
+<Page
+  title="FM Web Blog"
+  description="Mostly documentation for myself, but maybe it will help or interest someone."
+>
+  <div class="blog-container">
+    <section>
+      <ul class="blogs">
+        {
+          posts.map((post) => (
+            <li>
+              <BlogCard post={post} />
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
 </Page>

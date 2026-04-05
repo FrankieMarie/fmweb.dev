@@ -23,6 +23,12 @@ const posts = (await getCollection("blog")).sort(
       height: 100%;
     }
   }
+  
+  @media (max-width: 900px) {
+    .blogs {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
 
 <Page

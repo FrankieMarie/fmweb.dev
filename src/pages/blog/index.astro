@@ -9,6 +9,15 @@ const posts = (await getCollection("blog")).sort(
 ---
 
 <style>
+  .intro-paragraph {
+    max-width: 600px;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    font-size: 1.25rem;
+    margin-top: 4rem;
+  }
+
   section {
     margin: 4rem 0;
   }
@@ -35,7 +44,8 @@ const posts = (await getCollection("blog")).sort(
   title="FM Web Blog"
   description="Mostly documentation for myself, but maybe it will help or interest someone."
 >
-  <div class="blog-container">
+<div class="blog-container">
+  <p class="intro-paragraph">This is mostly documentation for myself, but maybe someone will find it helpful or interesting. If you stumbled upon it, welcome.</p>
     <section>
       <ul class="blogs">
         {

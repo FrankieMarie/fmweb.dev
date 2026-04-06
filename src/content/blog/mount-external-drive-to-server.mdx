@@ -1,9 +1,185 @@
 ---
-title: "Mount External Storage to MiniPC Server"
+title: "Mount External Storage to Mini PC Server"
 description: "Our homelab servers might not have the amount of storage space needed to host all our files. This will show you how to mount and external hard drive plugged into a mini pc or raspberry pi to use as storage for apps like Immich."
 pubDate: "2026-04-05"
-topics: ["docker","homelab"]
+topics: ["docker", "homelab"]
 ---
 
-todo
+import CodeSnippet from "../../components/Blog/CodeSnippet.astro";
+import Callout from "../../components/Blog/Callout.astro";
 
+Most homelab servers — whether it's a Raspberry Pi or a mini PC — don't ship with a ton of storage. My mini PC has 512GB, which is fine for running containers but fills up fast once you start hosting media with something like Immich. I had a 2TB Western Digital external hard drive sitting around, so I plugged it in via USB and mounted it as extra storage. If you're looking to do the same, this guide walks through the full process.
+
+### Step 1: Plug in the Drive
+
+Connect your USB hard drive to the mini PC. Make sure it's detected by the system:
+
+<CodeSnippet lang="bash" code={`lsblk`} />
+
+Look for your drive (e.g., `/dev/sdb1`) (yours might be different).
+
+### Step 2: Format the Drive (if needed)
+
+Using ext4 is effectively required if you want Immich to manage its library smoothly on a Linux server. If your drive isn't formatted, create a filesystem. For example, to format as ext4:
+
+<Callout>
+  <b>Warning:</b> This will erase all data on the drive. Backup what you need
+  before proceeding.
+</Callout>
+
+<CodeSnippet lang="bash" code={`sudo mkfs.ext4 /dev/sdb1`} />
+
+### Step 3: Create a Mount Point
+
+Decide where you want the drive to be accessible:
+
+<CodeSnippet lang="bash" code={`sudo mkdir -p /mnt/immich/library`} />
+
+### Step 4: Mount the Drive
+
+Mount it manually to test:
+
+<CodeSnippet lang="bash" code={`sudo mount /dev/sdb1 /mnt/immich/library`} />
+
+Verify it's mounted:
+
+<CodeSnippet
+  lang="bash"
+  code={`df -h
+lsblk`}
+/>
+
+### Step 5: Set Permissions
+
+Immich's Docker container runs as UID 1000, so give the directory correct ownership (my user id is 1000, you can check yours with `id -u`):
+
+<CodeSnippet lang="bash" code={`sudo chown -R 1000:1000 /mnt/immich/library`} />
+
+This ensures the container can read/write files on the drive.
+
+### Step 6: Auto-Mount at Boot
+
+Get the UUID of the drive:
+
+<CodeSnippet lang="bash" code={`sudo blkid /dev/sdb1`} />
+
+Edit `/etc/fstab` to mount it automatically:
+
+<CodeSnippet lang="bash" code={`sudo nano /etc/fstab`} />
+
+Add a line like this:
+
+<CodeSnippet
+  title="/etc/fstab"
+  lang="bash"
+  code={`UUID=your-drive-uuid /mnt/immich/library ext4 defaults 0 2`}
+/>
+
+Replace `your-drive-uuid` with the actual UUID from the `blkid` command.
+
+Test the fstab entry:
+
+<CodeSnippet lang="bash" code={`sudo mount -a`} />
+
+If no errors, it will auto-mount on every boot.
+
+### Step 7: Use in Docker
+
+Reference the path in your `.env` for Immich (or whatever container you are using this for, in my case it's for Immich):
+
+<CodeSnippet
+  title=".env"
+  lang="bash"
+  code={`UPLOAD_LOCATION=/mnt/immich/library`}
+/>
+
+Make sure the Docker container maps this directory:
+
+<CodeSnippet
+  title="docker-compose.yml"
+  lang="yaml"
+  code={`volumes:
+    - \${UPLOAD_LOCATION}:/data`}
+/>
+
+<hr />
+
+## Setting Up the Immich Database Folder
+
+Immich uses PostgreSQL to store all the metadata for your media (users, albums, tags, thumbnails, etc.). To make sure this data persists and works correctly with Docker, we set up a dedicated folder on the mini PC, not the external drive: `/opt/immich-db`.
+
+### Step 1: Choose a Local Folder
+
+We'll use `/opt/immich-db` for the database:
+
+<CodeSnippet lang="bash" code={`sudo mkdir -p /opt/immich-db`} />
+
+`/opt` is a standard Linux location for optional software and data. This keeps the database separate from your media files.
+
+### Step 2: Set Correct Permissions
+
+PostgreSQL inside the Docker container runs as UID 999. The folder must be writable by this user:
+
+<CodeSnippet lang="bash" code={`sudo chown -R 999:999 /opt/immich-db`} />
+
+This ensures the container can read/write database files without errors.
+
+### Step 3: Map the Folder to Docker
+
+In your `docker-compose.yml`, mount the folder to the Postgres container:
+
+<CodeSnippet
+  title="docker-compose.yml"
+  lang="yaml"
+  code={`
+  volumes:
+    - \${DB_DATA_LOCATION}:/var/lib/postgresql/data`}
+/>
+
+Docker maps `/opt/immich-db` on the host to `/var/lib/postgresql/data` in the container. PostgreSQL will store all metadata there, persisting even if you update or restart containers.
+
+It's also best practice to define the path in your `.env` file:
+
+<CodeSnippet
+  title=".env"
+  lang="bash"
+  code={`DB_DATA_LOCATION=/opt/immich-db`}
+/>
+
+### Step 4: Start the Containers
+
+After setting up the folder and `.env`, start Docker:
+
+<CodeSnippet lang="bash" code={`docker compose up -d`} />
+
+On the first run, Postgres initializes the database in `/opt/immich-db`. Subsequent restarts will reuse the existing database, keeping all your metadata intact.
+
+### Step 5: Permissions & Maintenance Tips
+
+If you ever change Postgres users or reset the database, make sure the folder is cleared carefully:
+
+<CodeSnippet
+  lang="bash"
+  code={`sudo rm -rf /opt/immich-db/*
+sudo chown -R 999:999 /opt/immich-db`}
+/>
+
+Never put the database on a NAS or network share — Immich requires local storage for the DB.
+
+Verify logs:
+
+<CodeSnippet lang="bash" code={`docker logs -f immich_server`} />
+
+---
+
+## A Note on ext4 and Reusing the Drive
+
+Since we formatted the drive as ext4, it's fully compatible with anything you'd run on Linux. ext4 is the default Linux filesystem — Docker containers, Samba shares, media servers, backups — it all works out of the box.
+
+The only downside is that ext4 isn't natively readable on Windows or macOS. But since the drive lives on your server and everything accesses it through Linux, that won't matter.
+
+You're also not limited to using this drive for just Immich. You can create additional directories and mount them into other containers. For example:
+
+<CodeSnippet lang="bash" code={`sudo mkdir -p /mnt/data/whatever`} />
+
+Just keep permissions in mind — different containers may run as different UIDs, so set ownership accordingly for each directory.

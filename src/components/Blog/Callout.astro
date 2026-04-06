@@ -1,0 +1,36 @@
+---
+import { TriangleAlert } from "@lucide/astro";
+
+interface Props {
+  type?: "warning";
+}
+
+const { type = "warning" } = Astro.props;
+---
+
+<div class:list={["callout", type]}>
+  <TriangleAlert size={18} />
+  <span><slot /></span>
+</div>
+
+<style>
+  .callout {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+  }
+
+  .callout :global(svg) {
+    flex-shrink: 0;
+  }
+
+  .callout :global(p) {
+    margin: 0;
+    display: inline;
+    color: inherit;
+  }
+
+  .warning {
+    color: #d75f87;
+  }
+</style>

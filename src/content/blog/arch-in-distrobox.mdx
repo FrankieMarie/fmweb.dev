@@ -1,0 +1,70 @@
+---
+title: "Running Arch Linux in Distrobox on Debian"
+description: "How to combine Debian's stability and security with Arch's cutting-edge development environment using Distrobox and Podman."
+pubDate: "2026-05-02"
+topics: ["linux", "coding"]
+---
+
+import CodeSnippet from "../../components/Blog/CodeSnippet.astro";
+import Callout from "../../components/Blog/Callout.astro";
+
+I want the stability and security of Debian as my host system, but I also want the latest packages and the cutting-edge development tools found in Arch Linux, especially for tools like Neovim.
+
+The solution is **<a href="https://distrobox.it/" target="_blank" rel="noopener noreferrer">Distrobox</a>**, which allows me to run an Arch container seamlessly alongside my Debian host without compromising system integrity.
+
+## The Setup
+
+### 1. Install the foundations
+
+First, install `podman` and `distrobox` on your Debian host:
+
+<CodeSnippet
+  lang="bash"
+  code={`sudo apt update
+sudo apt install -y podman distrobox`}
+/>
+
+### 2. Isolate the environment
+
+To keep my Arch configuration from cluttering my Debian home directory, I create a dedicated directory to act as the container's `$HOME`:
+
+<CodeSnippet lang="bash" code={`mkdir -p ~/arch-home`} />
+
+### 3. Create and enter the Arch box
+
+Create the container, telling Distrobox to use our new isolated home:
+
+<CodeSnippet
+  lang="bash"
+  code={`distrobox-create -i archlinux:latest -n arch --home ~/arch-home
+distrobox enter arch`}
+/>
+
+### 4. Initialize Arch
+
+Once inside, the very first thing you must do is update the keyring to avoid package signature errors:
+
+<CodeSnippet
+  lang="bash"
+  code={`sudo pacman -Sy --noconfirm archlinux-keyring
+sudo pacman -Syu --noconfirm`}
+/>
+
+### 5. Personalize
+
+Now you can clone your dotfiles and install your development tools (like Claude Code or other coding agents). These will live entirely within the `~/arch-home` directory.
+
+<CodeSnippet
+  lang="bash"
+  code={`git clone https://github.com/tiltFrankie/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+./install.sh --all`}
+/>
+
+## Pro Tip: The Shortcut
+
+Tired of typing `distrobox enter arch`? Add this alias to your Debian `~/.bashrc` or `~/.zshrc`:
+
+<CodeSnippet lang="bash" code={`alias arch='distrobox enter arch'`} />
+
+Now, a single command `arch` drops you straight into your development environment.

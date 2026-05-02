@@ -6,6 +6,7 @@ import Page from "../../layouts/Page.astro";
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+const allTopics = [...new Set(posts.flatMap((post) => post.data.topics))].sort();
 ---
 
 <style>
@@ -20,6 +21,22 @@ const posts = (await getCollection("blog")).sort(
 
   section {
     margin: 4rem 0;
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 4rem;
+  }
+
+  .pill {
+    padding: 0.35rem 1rem;
+    border-radius: 999px;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.875rem;
   }
 
   .blogs {
@@ -46,6 +63,11 @@ const posts = (await getCollection("blog")).sort(
 >
 <div class="blog-container">
   <p class="intro-paragraph">This is mostly documentation for myself, but maybe someone will find it helpful or interesting. If you stumbled upon it, welcome.</p>
+    <div class="pills">
+      {allTopics.map((tag) => (
+        <a class="pill" href={`/blog/tag/${tag}`}>{tag}</a>
+      ))}
+    </div>
     <section>
       <ul class="blogs">
         {

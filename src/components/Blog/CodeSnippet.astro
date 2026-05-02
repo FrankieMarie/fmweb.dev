@@ -195,12 +195,16 @@ const habamax = {
     padding: 0.25rem;
     display: flex;
     align-items: center;
-    transition: color 0.2s, border-color 0.2s;
+    transition: color 0.2s;
   }
 
   .copy-btn:hover {
     color: #bcbcbc;
-    border-color: #585858;
+  }
+
+  .code-body {
+    position: relative;
+    padding-right: 3rem; /* Prevents text overlap with button on small screens */
   }
 
   .copy-btn .icon-check {

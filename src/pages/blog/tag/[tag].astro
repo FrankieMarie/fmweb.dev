@@ -1,0 +1,102 @@
+---
+import { getCollection } from "astro:content";
+import BlogCard from "../../../components/Blog/BlogCard.astro";
+import Page from "../../../layouts/Page.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  const allTopics = [...new Set(posts.flatMap((post) => post.data.topics))];
+  return allTopics.map((tag) => ({
+    params: { tag },
+    props: {
+      posts: posts
+        .filter((post) => post.data.topics.includes(tag))
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+      tag,
+    },
+  }));
+}
+
+const { posts, tag } = Astro.props;
+---
+
+<style>
+  .intro-paragraph {
+    max-width: 600px;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    font-size: 1.25rem;
+    margin-top: 4rem;
+  }
+
+  section {
+    margin: 4rem 0;
+  }
+
+  .blogs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr;
+    gap: 2rem;
+
+    li {
+      height: 100%;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .blogs {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 4rem;
+  }
+
+  .pill {
+    padding: 0.35rem 1rem;
+    border-radius: 999px;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.875rem;
+  }
+
+  .pill.active {
+    color: var(--pink);
+  }
+</style>
+
+<Page title={`FM Web Blog — ${tag}`} description={`Blog posts tagged with ${tag}.`}>
+  <div class="blog-container">
+    <p class="intro-paragraph">Posts tagged with <strong>{tag}</strong>.</p>
+    <div class="pills">
+      <a class="pill" href="/blog">All</a>
+      {
+        [...new Set(
+          (await getCollection("blog")).flatMap((p) => p.data.topics)
+        )].sort().map((t) => (
+          <a class={`pill${t === tag ? " active" : ""}`} href={`/blog/tag/${t}`}>
+            {t}
+          </a>
+        ))
+      }
+    </div>
+    <section>
+      <ul class="blogs">
+        {
+          posts.map((post) => (
+            <li>
+              <BlogCard post={post} />
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+</Page>

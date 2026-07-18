@@ -3,7 +3,9 @@
 
 <style>
   .hero {
-    height: calc(100vh - 3.25rem);
+    height: 100dvh;
+    flex-shrink: 0;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,12 +18,16 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    width: 100%;
   }
 
   .heading-text {
-    text-transform: uppercase;
-    text-align: right;
-    font-size: clamp(48px, 10vw, 96px);
+    text-align: center;
+    white-space: nowrap;
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    padding-inline: calc(var(--size-8) + 1rem);
+    font-size: calc((100vw - 2 * (var(--size-8) + 1rem)) * 0.167);
     line-height: 1.1;
     font-family: 'Portico', sans-serif;
     font-weight: normal;
@@ -32,13 +38,12 @@
   .dev {
     position: relative;
     display: inline-block;
-    cursor: default;
   }
 
   .fm {
-    color: var(--bg);
-    -webkit-text-stroke: 1px var(--grey);
-    text-stroke: 1px var(--grey);
+    color: transparent;
+    -webkit-text-stroke: 1.75px var(--grey);
+    text-stroke: 1.75px var(--grey);
   }
 
   .fm::before {
@@ -47,8 +52,8 @@
     left: 0;
     top: 0;
     color: transparent;
-    -webkit-text-stroke: 1px var(--gold);
-    text-stroke: 1px var(--gold);
+    -webkit-text-stroke: 1.75px var(--accent);
+    text-stroke: 1.75px var(--accent);
     pointer-events: none;
     -webkit-mask-image: radial-gradient(
       circle var(--radius, 0px) at var(--x, -100px) var(--y, -100px),
@@ -64,9 +69,9 @@
 
   .web,
   .dev {
-    color: var(--bg);
-    -webkit-text-stroke: 1px var(--grey);
-    text-stroke: 1px var(--grey);
+    color: transparent;
+    -webkit-text-stroke: 1.75px var(--grey);
+    text-stroke: 1.75px var(--grey);
   }
 
   .web::before,
@@ -76,8 +81,8 @@
     left: 0;
     top: 0;
     color: transparent;
-    -webkit-text-stroke: 1px var(--white);
-    text-stroke: 1px var(--white);
+    -webkit-text-stroke: 1.75px var(--white);
+    text-stroke: 1.75px var(--white);
     pointer-events: none;
     -webkit-mask-image: radial-gradient(
       circle var(--radius, 0px) at var(--x, -100px) var(--y, -100px),
@@ -92,43 +97,31 @@
   }
 
   .heading-subtext {
-    text-transform: uppercase;
     text-align: right;
     padding: .5rem 0;
-    font-size: 1rem;
+    font-size: calc(18 * var(--fluid));
   }
 
   .cta-text {
-    color: var(--gold);
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    font-size: .75rem;
-    margin-bottom: 10rem;
-    padding: 1rem;
+    color: var(--accent);
+    font-size: calc(16 * var(--fluid));
+    margin-bottom: var(--size-24);
+    padding: .5rem 1rem;
     border-radius: 9999px;
-    background: var(--bg);
-    transition: color 0.25s ease-in-out, opacity 0.2s ease;
-
-    &:hover,
-    &:focus {
-      color: var(--gold);
-    }
-  } 
-
-  @media (max-width: 930px) {
-    .heading-subtext {
-      font-size: 0.875rem;
-    }
+    transition: color 0.25s ease-in-out;
   }
 
-  @media (max-width: 675px) {
+  @media (width < 37.5rem) {
     .heading {
       align-items: center;
     }
 
     .heading-subtext {
-      font-size: 0.75rem;
       text-align: center;
+    }
+
+    .cta-text {
+      margin-bottom: calc(84 * var(--fluid));
     }
   }
 </style>
@@ -145,7 +138,7 @@
       targetRadius: 0,
       hasEntered: false
     }));
-    const MAX_RADIUS = 125;
+    const MAX_RADIUS = 170;
     const LERP_OPACITY = 0.2;
     const LERP_RADIUS = 0.25;
     let rafId = 0;
@@ -219,25 +212,14 @@
     });
   }
 
-  // Hide Discover More after scrolling 200px
-  document.addEventListener('DOMContentLoaded', () => {
-    const cta = document.querySelector('.cta-text') as HTMLElement;
-    if (cta) {
-      window.addEventListener('scroll', () => {
-        const hidden = window.scrollY > 200;
-        cta.style.opacity = hidden ? '0' : '1';
-        cta.style.pointerEvents = hidden ? 'none' : 'auto';
-      }, { passive: true });
-    }
-  });
 </script>
 
-<section class="content-container hero">
+<section class="hero" data-snap-section>
   <div class="heading">
     <h1 class="heading-text">
       <span class="fm" data-text="FM">FM</span><span class="web" data-text="WEB">WEB</span><span class="dev" data-text="DEV">DEV</span>
     </h1>
     <p class="heading-subtext">Interactive web development</p>
   </div>
-  <a class="cta-text" href="#about">Discover More</a>
+  <a class="cta-text" href="#about">Discover more</a>
 </section>

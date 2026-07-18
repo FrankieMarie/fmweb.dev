@@ -1,0 +1,136 @@
+<div class="mercury-bg">
+  <canvas class="mercury-canvas" style="width: 100%; height: 100%"></canvas>
+  <div class="mercury-scrim"></div>
+  <div class="mercury-grain"></div>
+</div>
+
+<style>
+  .mercury-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: var(--bg);
+  }
+
+  .mercury-canvas {
+    width: 100%;
+    height: 100%;
+  }
+
+  .mercury-scrim {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      rgba(0, 0, 0, 0.52) 0%,
+      rgba(0, 0, 0, 0.76) 100%
+    );
+  }
+
+  .mercury-grain {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+    opacity: 0.11;
+  }
+</style>
+
+<script>
+  import { createShader } from 'shaders/js';
+
+  const definition = {
+    structureVersion: 1,
+    components: [
+      {
+        id: 'base',
+        type: 'SolidColor',
+        props: { color: '#0f0f0f', opacity: 1 },
+      },
+      {
+        id: 'swirl',
+        type: 'Swirl',
+        props: {
+          colorA: '#ccf2ff',
+          colorB: '#191921',
+          blend: 45,
+          speed: 0.6,
+          detail: 3.5,
+          colorSpace: 'oklab',
+          opacity: 1,
+        },
+      },
+      {
+        id: 'blob',
+        type: 'Blob',
+        props: {
+          seed: 1,
+          size: 0.15,
+          speed: 0.5,
+          center: {
+            type: 'mouse-position',
+            reach: 0.55,
+            originX: 0.5,
+            originY: 0.5,
+            momentum: 0.3,
+            smoothing: 0.3,
+          },
+          colorA: '#4e587891',
+          colorB: '#3b4b6b',
+          softness: 0.7,
+          deformation: 0.9,
+          highlightX: 0.3,
+          highlightY: -0.3,
+          highlightZ: 0.4,
+          highlightColor: '#ffe11a',
+          highlightIntensity: 0.5,
+          colorSpace: 'linear',
+          blendMode: 'linearDodge',
+          opacity: 1,
+        },
+      },
+      {
+        id: 'wave',
+        type: 'WaveDistortion',
+        props: {
+          angle: 23,
+          speed: 2.5,
+          strength: 0.15,
+          frequency: 5.1,
+          waveType: 'sine',
+          edges: 'mirror',
+          visible: true,
+          opacity: 1,
+        },
+      },
+      {
+        id: 'ripples',
+        type: 'CursorRipples',
+        props: {
+          decay: 5,
+          radius: 0.7,
+          intensity: 20,
+          chromaticSplit: 2,
+          edges: 'stretch',
+          visible: true,
+          opacity: 1,
+        },
+      },
+      {
+        id: 'grain',
+        type: 'FilmGrain',
+        props: { bias: 2, strength: 0.075, animated: false, visible: true, opacity: 1 },
+      },
+    ],
+  };
+
+  const canvas = document.querySelector<HTMLCanvasElement>('.mercury-canvas');
+  if (canvas && 'gpu' in navigator) {
+    try {
+      await createShader(canvas, definition);
+    } catch (err) {
+      console.warn('Shader background unavailable:', err);
+    }
+  }
+</script>

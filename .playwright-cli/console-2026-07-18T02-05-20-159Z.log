@@ -1,0 +1,24 @@
+[     291ms] [WARNING] No available adapters. @ http://localhost:4399/:0
+[     292ms] [ERROR] [gpu] initialization error: Error: Could not find a compatible GPU
+    at Object.init (http://localhost:4399/node_modules/.vite/deps/shaders_js.js?v=398cc3c7:14623:23)
+    at async createOwnRoot (http://localhost:4399/node_modules/.vite/deps/shaders_js.js?v=398cc3c7:269745:16)
+    at async acquireRoot (http://localhost:4399/node_modules/.vite/deps/shaders_js.js?v=398cc3c7:269735:15)
+    at async Object.initialize (http://localhost:4399/node_modules/.vite/deps/shaders_js.js?v=398cc3c7:272086:17)
+    at async build (http://localhost:4399/node_modules/.vite/deps/shaders_js.js?v=398cc3c7:272745:5)
+    at async createShader (http://localhost:4399/node_modules/.vite/deps/shaders_js.js?v=398cc3c7:272829:13)
+    at async http://localhost:4399/src/components/shared/MercuryBackground.astro?astro&type=script&index=0&lang.ts:89:5 @ http://localhost:4399/node_modules/.vite/deps/shaders_js.js?v=398cc3c7:272155
+[    3400ms] [WARNING] The resource http://localhost:4399/fonts/atkinson-regular.woff was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:4399/:0
+[    3400ms] [WARNING] The resource http://localhost:4399/fonts/atkinson-bold.woff was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:4399/:0
+[   75004ms] [WARNING] The resource http://localhost:4399/fonts/atkinson-regular.woff was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:4399/:0
+[   75004ms] [WARNING] The resource http://localhost:4399/fonts/atkinson-bold.woff was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:4399/:0
+[   91232ms] [WARNING] No available adapters. @ http://localhost:4399/:0
+[   91232ms] [ERROR] [gpu] initialization error: Error: Could not find a compatible GPU
+    at Object.init (http://localhost:4399/node_modules/.vite/deps/shaders_js.js?v=398cc3c7:14623:23)
+    at async createOwnRoot (http://localhost:4399/node_modules/.vite/deps/shaders_js.js?v=398cc3c7:269745:16)
+    at async acquireRoot (http://localhost:4399/node_modules/.vite/deps/shaders_js.js?v=398cc3c7:269735:15)
+    at async Object.initialize (http://localhost:4399/node_modules/.vite/deps/shaders_js.js?v=398cc3c7:272086:17)
+    at async build (http://localhost:4399/node_modules/.vite/deps/shaders_js.js?v=398cc3c7:272745:5)
+    at async createShader (http://localhost:4399/node_modules/.vite/deps/shaders_js.js?v=398cc3c7:272829:13)
+    at async http://localhost:4399/src/components/shared/MercuryBackground.astro?astro&type=script&index=0&lang.ts:89:5 @ http://localhost:4399/node_modules/.vite/deps/shaders_js.js?v=398cc3c7:272155
+[   94283ms] [WARNING] The resource http://localhost:4399/fonts/atkinson-regular.woff was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:4399/:0
+[   94283ms] [WARNING] The resource http://localhost:4399/fonts/atkinson-bold.woff was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:4399/:0

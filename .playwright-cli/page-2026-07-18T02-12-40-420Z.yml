@@ -1,0 +1,80 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - link "Frankie Marie" [ref=e3] [cursor=pointer]:
+      - /url: /
+    - navigation [ref=e4]:
+      - link "Blog" [ref=e5] [cursor=pointer]:
+        - /url: /blog
+  - main [ref=e6]:
+    - generic [ref=e7]:
+      - paragraph [ref=e8]: This is mostly documentation for myself, but maybe someone will find it helpful or interesting. If you stumbled upon it, welcome.
+      - generic [ref=e9]:
+        - link "coding" [ref=e10] [cursor=pointer]:
+          - /url: /blog/tag/coding
+        - link "docker" [ref=e11] [cursor=pointer]:
+          - /url: /blog/tag/docker
+        - link "homelab" [ref=e12] [cursor=pointer]:
+          - /url: /blog/tag/homelab
+        - link "linux" [ref=e13] [cursor=pointer]:
+          - /url: /blog/tag/linux
+      - list [ref=e15]:
+        - listitem [ref=e16]:
+          - link "Running Arch Linux in Distrobox on Debian How to combine Debian's stability and security with Arch's cutting-edge development environment using Distrobox and Podman. May 1, 2026 linux, coding" [ref=e17] [cursor=pointer]:
+            - /url: /blog/arch-in-distrobox/
+            - heading "Running Arch Linux in Distrobox on Debian" [level=2] [ref=e18]
+            - paragraph [ref=e19]: How to combine Debian's stability and security with Arch's cutting-edge development environment using Distrobox and Podman.
+            - generic [ref=e20]:
+              - paragraph [ref=e21]:
+                - time [ref=e22]: May 1, 2026
+              - paragraph [ref=e23]: linux, coding
+        - listitem [ref=e24]:
+          - link "Mount External Storage to Mini PC Server Our homelab servers might not have the amount of storage space needed to host all our files. This will show you how to mount and external hard drive plugged into a mini pc or raspberry pi to use as storage for apps like Immich. Apr 4, 2026 docker, homelab" [ref=e25] [cursor=pointer]:
+            - /url: /blog/mount-external-drive-to-server/
+            - heading "Mount External Storage to Mini PC Server" [level=2] [ref=e26]
+            - paragraph [ref=e27]: Our homelab servers might not have the amount of storage space needed to host all our files. This will show you how to mount and external hard drive plugged into a mini pc or raspberry pi to use as storage for apps like Immich.
+            - generic [ref=e28]:
+              - paragraph [ref=e29]:
+                - time [ref=e30]: Apr 4, 2026
+              - paragraph [ref=e31]: docker, homelab
+        - listitem [ref=e32]:
+          - link "Local HTTPS with Nginx Proxy Manager Nginx Proxy Manager lets you put a reverse proxy in front of your services to give them proper domain names add SSL so everything runs over HTTPS. This helps avoid browser warnings and makes your setup feel more like a real deployment. Apr 2, 2026 docker, homelab" [ref=e33] [cursor=pointer]:
+            - /url: /blog/local-https/
+            - heading "Local HTTPS with Nginx Proxy Manager" [level=2] [ref=e34]
+            - paragraph [ref=e35]: Nginx Proxy Manager lets you put a reverse proxy in front of your services to give them proper domain names add SSL so everything runs over HTTPS. This helps avoid browser warnings and makes your setup feel more like a real deployment.
+            - generic [ref=e36]:
+              - paragraph [ref=e37]:
+                - time [ref=e38]: Apr 2, 2026
+              - paragraph [ref=e39]: docker, homelab
+        - listitem [ref=e40]:
+          - link "Jellyfin Media Server This covers using a mini PC as the Docker host, Jellyfin for streaming, Sonarr, Radarr, and Prowlarr to automate content management, qBittorrent as the download client, and tying it all together with Jellyseer, so anyone on the network can request movies and shows. Apr 1, 2026 docker, homelab" [ref=e41] [cursor=pointer]:
+            - /url: /blog/jellyfin-media-server/
+            - heading "Jellyfin Media Server" [level=2] [ref=e42]
+            - paragraph [ref=e43]: This covers using a mini PC as the Docker host, Jellyfin for streaming, Sonarr, Radarr, and Prowlarr to automate content management, qBittorrent as the download client, and tying it all together with Jellyseer, so anyone on the network can request movies and shows.
+            - generic [ref=e44]:
+              - paragraph [ref=e45]:
+                - time [ref=e46]: Apr 1, 2026
+              - paragraph [ref=e47]: docker, homelab
+        - listitem [ref=e48]:
+          - link "Using a Ubiquity NAS to Store Media This post will show us how to set up a mini PC with ubuntu-server for all our Docker apps and use our Ubquity NAS to store all our movies and shows in a folder structure specific to jellyfin. Mar 31, 2026 docker, homelab" [ref=e49] [cursor=pointer]:
+            - /url: /blog/connect-ubiquity-nas-to-server/
+            - heading "Using a Ubiquity NAS to Store Media" [level=2] [ref=e50]
+            - paragraph [ref=e51]: This post will show us how to set up a mini PC with ubuntu-server for all our Docker apps and use our Ubquity NAS to store all our movies and shows in a folder structure specific to jellyfin.
+            - generic [ref=e52]:
+              - paragraph [ref=e53]:
+                - time [ref=e54]: Mar 31, 2026
+              - paragraph [ref=e55]: docker, homelab
+  - contentinfo [ref=e56]:
+    - generic [ref=e57]: © FM Web Dev – 2026
+    - list [ref=e58]:
+      - listitem [ref=e59]:
+        - link [ref=e60] [cursor=pointer]:
+          - /url: https://codepen.io/frankiemarie
+          - img [ref=e61]
+      - listitem [ref=e65]:
+        - link [ref=e66] [cursor=pointer]:
+          - /url: https://github.com/FrankieMarie
+          - img [ref=e67]
+      - listitem [ref=e70]:
+        - link [ref=e71] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/frankiedenell/
+          - img [ref=e72]

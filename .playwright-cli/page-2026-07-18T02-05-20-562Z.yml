@@ -1,0 +1,55 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - link "Frankie Marie" [ref=e3] [cursor=pointer]:
+      - /url: /
+    - navigation [ref=e4]:
+      - link "Blog" [ref=e5] [cursor=pointer]:
+        - /url: /blog
+  - main [ref=e8]:
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - heading "FM FM WEB WEB DEV DEV" [level=1] [ref=e11]:
+          - generic [ref=e12]: FM FM
+          - generic [ref=e13]: WEB WEB
+          - generic [ref=e14]: DEV DEV
+        - paragraph [ref=e15]: Interactive web development
+      - link "Discover more" [ref=e16] [cursor=pointer]:
+        - /url: "#about"
+    - generic [ref=e17]:
+      - heading "Bio" [level=2] [ref=e20]
+      - paragraph [ref=e21]: I was born in Michigan’s Upper Peninsula and my upbringing was split between the U.P. and Denver, Colorado. After discovering programming in my early twenties, I’ve spent nearly a decade working as a professional web developer.
+      - paragraph [ref=e22]: My experience spans front-end application development, UI/UX design, interactive experiences, API and server-side engineering, as well as networking and Linux systems. I enjoy building thoughtful, performant applications and exploring how design and engineering intersect to create engaging user experiences.
+      - paragraph [ref=e23]: Outside of work, I spend my time kayaking, fishing, working on my car and Jeep, and diving into all kinds of hands-on projects and crafts. At home, I’m kept busy by a crew of nine cats, three dogs, and a rabbit.
+      - paragraph [ref=e24]:
+        - text: Currently, I develop web applications at
+        - link "Tilt" [ref=e25] [cursor=pointer]:
+          - /url: https://www.tilt.com
+        - text: .
+  - contentinfo:
+    - generic: © FM Web Dev – 2026
+    - list:
+      - listitem:
+        - link [ref=e26] [cursor=pointer]:
+          - /url: https://codepen.io/frankiemarie
+          - img [ref=e27]
+      - listitem:
+        - link [ref=e31] [cursor=pointer]:
+          - /url: https://github.com/FrankieMarie
+          - img [ref=e32]
+      - listitem:
+        - link [ref=e35] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/frankiedenell/
+          - img [ref=e36]
+  - generic [ref=e42]:
+    - button "Menu" [ref=e43]:
+      - img [ref=e45]
+      - generic: Menu
+    - button "Inspect" [ref=e49]:
+      - img [ref=e51]
+      - generic: Inspect
+    - button "Audit" [ref=e53]:
+      - img [ref=e55]
+      - generic: Audit
+    - button "Settings" [ref=e58]:
+      - img [ref=e60]
+      - generic: Settings

@@ -2,22 +2,46 @@
 import BaseHead from '../components/shared/BaseHead.astro';
 import CustomCursor from '../components/shared/CustomCursor.astro';
 import Footer from '../components/shared/Footer.astro';
-import GridBackground from '../components/shared/GridBackground.astro';
+import MercuryBackground from '../components/shared/MercuryBackground.astro';
 import Topbar from '../components/shared/Topbar.astro';
-const { title, description } = Astro.props;
+const { title, description, snapScroll } = Astro.props;
 ---
+
+<style>
+  #scroll-viewport {
+    position: relative;
+    z-index: 1;
+  }
+</style>
 
 <html lang="en">
   <head>
     <BaseHead title={title} description={description}/>
   </head>
  <body>
-    <GridBackground />
-    <Topbar />
-    <main>
-      <slot/>
-    </main>
-    <Footer />
+    <MercuryBackground />
+    <Topbar fixed={snapScroll} />
+    {
+      snapScroll ? (
+        <>
+          <div id="scroll-viewport">
+            <div id="scroll-content">
+              <main>
+                <slot />
+              </main>
+            </div>
+          </div>
+          <Footer fixed />
+        </>
+      ) : (
+        <>
+          <main>
+            <slot />
+          </main>
+          <Footer />
+        </>
+      )
+    }
     <CustomCursor />
   </body>
 </html>

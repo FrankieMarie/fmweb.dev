@@ -1,0 +1,40 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - link "Frankie Marie" [ref=e3] [cursor=pointer]:
+      - /url: /
+    - navigation [ref=e4]:
+      - link "Blog" [ref=e5] [cursor=pointer]:
+        - /url: /blog
+  - main [ref=e8]:
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - heading "FM FM WEB WEB DEV DEV" [level=1] [ref=e11]:
+          - generic [ref=e12]: FM FM
+          - generic [ref=e13]: WEB WEB
+          - generic [ref=e14]: DEV DEV
+        - paragraph [ref=e15]: Interactive web development
+      - link "Discover more" [ref=e16] [cursor=pointer]:
+        - /url: "#about"
+    - generic [ref=e17]:
+      - heading "Bio" [level=2] [ref=e20]
+      - paragraph [ref=e21]: I’ve spent nearly a decade as a professional web developer, working across front-end apps, UI/UX, interactive experiences, and API and server-side engineering. I enjoy building thoughtful, performant applications where design and engineering meet.
+      - paragraph [ref=e22]:
+        - text: Currently, I develop web applications at
+        - link "Tilt" [ref=e23] [cursor=pointer]:
+          - /url: https://www.tilt.com
+        - text: .
+  - contentinfo:
+    - generic: © FM Web Dev – 2026
+    - list:
+      - listitem:
+        - link [ref=e24] [cursor=pointer]:
+          - /url: https://codepen.io/frankiemarie
+          - img [ref=e25]
+      - listitem:
+        - link [ref=e29] [cursor=pointer]:
+          - /url: https://github.com/FrankieMarie
+          - img [ref=e30]
+      - listitem:
+        - link [ref=e33] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/frankiedenell/
+          - img [ref=e34]

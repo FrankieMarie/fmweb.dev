@@ -5,7 +5,7 @@ import BaseHead from "../components/shared/BaseHead.astro";
 import Footer from "../components/shared/Footer.astro";
 import FormattedDate from "../components/Blog/FormattedDate.astro";
 import Topbar from "../components/shared/Topbar.astro";
-import GridBackground from "../components/shared/GridBackground.astro";
+import MercuryBackground from "../components/shared/MercuryBackground.astro";
 import CustomCursor from "../components/shared/CustomCursor.astro";
 
 type Props = CollectionEntry<"blog">["data"];
@@ -54,7 +54,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
         background: #262626;
         color: #87afaf;
         padding: 0.15em 0.4em;
-        border-radius: 4px;
+        border-radius: 0.25rem;
         font-size: 0.9em;
         font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo,
           Consolas, "DejaVu Sans Mono", monospace;
@@ -74,7 +74,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
   </head>
 
   <body>
-    <GridBackground />
+    <MercuryBackground />
     <Topbar />
     <main>
       <article>

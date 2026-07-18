@@ -31,21 +31,21 @@ const { post } = Astro.props;
   a {
     display: flex;
     flex-direction: column;
-    border-radius: 20px;
+    border-radius: 1.25rem;
     height: 100%;
     text-decoration: none;
     color: var(--white);
   }
 
   .title {
-    padding: 16px 16px 0 16px;
+    padding: 1rem 1rem 0 1rem;
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 20px 20px 0 0;
+    border-radius: 1.25rem 1.25rem 0 0;
     width: 100%;
   }
 
   .summary {
-    padding: 8px 16px 16px 16px;
+    padding: 0.5rem 1rem 1rem 1rem;
     background: rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.6);
     font-weight: normal;
@@ -59,18 +59,18 @@ const { post } = Astro.props;
     margin-top: 2px;
 
     p {
-      padding: 16px;
+      padding: 1rem;
       background: rgba(255, 255, 255, 0.1);
       text-align: center;
     }
 
     .date {
-      border-radius: 0 0 0 20px;
+      border-radius: 0 0 0 1.25rem;
       color: var(--pink);
     }
 
     .tags {
-      border-radius: 0 0 20px 0;
+      border-radius: 0 0 1.25rem 0;
       color: var(--yellow);
     }
   }

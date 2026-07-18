@@ -118,7 +118,7 @@ const habamax = {
     // Markup
     {
       scope: ["markup.heading"],
-      settings: { foreground: "#bcbcbc", fontStyle: "bold" },
+      settings: { foreground: "#bcbcbc" },
     },
     {
       scope: ["markup.italic"],
@@ -126,7 +126,7 @@ const habamax = {
     },
     {
       scope: ["markup.bold"],
-      settings: { fontStyle: "bold" },
+      settings: {},
     },
   ],
 };
@@ -162,7 +162,7 @@ const habamax = {
 <style>
   .code-snippet {
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
+    border-radius: 0.5rem;
     overflow: hidden;
     margin: 1.5rem 0;
     font-size: var(--size-14);
@@ -174,9 +174,8 @@ const habamax = {
     color: #808080;
     padding: 0.4rem 1rem;
     font-size: var(--size-12);
-    font-family: "Atkinson", sans-serif;
+    font-family: "Adwaita Sans", sans-serif;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    letter-spacing: 0.05em;
   }
 
   .code-body {
@@ -189,7 +188,7 @@ const habamax = {
     right: 0.5rem;
     background: none;
     border: 1px solid transparent;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     color: #767676;
     cursor: pointer;
     padding: 0.25rem;

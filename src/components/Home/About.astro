@@ -7,9 +7,10 @@ import SectionHR from "./SectionHR.astro";
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 1rem;
     width: 100%;
-    padding: 10rem 0;
+    flex: 1;
 
     .bio-heading {
       display: flex;
@@ -21,41 +22,41 @@ import SectionHR from "./SectionHR.astro";
 
     h2 {
       font-size: 1rem;
-      text-transform: uppercase;
-      letter-spacing: .15em;
       margin-bottom: 1rem;
     }
 
     .bio-paragraph {
       font-size: 1rem;
-      max-width: 600px;
+      max-width: 37.5rem;
       margin: 0 auto;
       width: 100%;
-      padding: 0 1rem;
+      padding: 0 calc(var(--size-8) + 1rem);
     }
 
     .bio-link {
-      color: var(--gold);
+      color: var(--accent);
       transition: color 0.25s ease-in-out;
       padding: .25rem;
-      border-radius: 8px;
+      border-radius: 0.5rem;
+    }
+  }
+
+  @media (width < 37.5rem) {
+    .about .bio-paragraph {
+      font-size: calc(14 * var(--fluid));
     }
   }
 </style> 
 
-<section class="content-container about" id="about">
+<section class="about" id="about" data-snap-section>
   <div class="bio-heading">
     <SectionHR />
-    <h2 class="inter-200">bio</h2>
+    <h2 class="inter-200">Bio</h2>
   </div>
-  <p class=" bio-paragraph">
-    I was born in Michigan’s Upper Peninsula and my upbringing was split between the U.P. and Denver, Colorado. After discovering programming in my early twenties, I’ve spent nearly a decade working as a professional web developer.</p>
-  <p class=" bio-paragraph">
-    My experience spans front-end application development, UI/UX design, interactive experiences, API and server-side engineering, as well as networking and Linux systems. I enjoy building thoughtful, performant applications and exploring how design and engineering intersect to create engaging user experiences.</p>
   <p class="bio-paragraph">
-    Outside of work, I spend my time kayaking, fishing, working on my car and Jeep, and diving into all kinds of hands-on projects and crafts. At home, I’m kept busy by a crew of nine cats, three dogs, and a rabbit.
+    I’ve spent nearly a decade as a professional web developer, working across front-end apps, UI/UX, interactive experiences, and API and server-side engineering. I enjoy building thoughtful, performant applications where design and engineering meet.
   </p>
-  <p class=" bio-paragraph">
+  <p class="bio-paragraph">
     Currently, I develop web applications at<a class="bio-link" href="https://www.tilt.com" target="_blank" rel="noopener noreferrer">Tilt</a>.
   </p>
 </section>

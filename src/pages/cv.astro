@@ -1,0 +1,372 @@
+---
+import Page from "../layouts/Page.astro";
+
+const experience = [
+  {
+    company: "Tilt Finance",
+    role: "Staff Frontend Engineer",
+    period: "June 2024 – Present",
+    location: "Remote",
+    highlights: [
+      "Built and maintain a Turborepo serving four applications with independent deployment pipelines, a shared component library, route-level code splitting, and tuned vendor chunking.",
+      "Designed and own cross-origin authentication across separately hosted frontends and APIs, including cookie-based sessions, route guards, and third-party identity provider integration.",
+      "Built a design system with Product Design, including shared components, design tokens, fluid typography and spacing, and documentation.",
+      "Set repository-wide standards with shared linting, formatting, and TypeScript configurations, pre-commit checks, and agent-readable instructions at root and package levels.",
+      "Built feature flag and A/B testing infrastructure, integrated multiple analytics vendors, and automated API telemetry.",
+      "Interviewed, hired, and mentored engineers.",
+    ],
+  },
+  {
+    company: "Harry's Inc.",
+    role: "Senior Software Engineer",
+    period: "March 2023 – June 2024",
+    location: "Remote",
+    highlights: [
+      "Developed and maintained a statically generated e-commerce site and server-rendered account portal for a Harry’s Inc. brand using React, TypeScript, Node.js, and Tailwind CSS, with multiple payment methods through Shopify Checkout.",
+    ],
+  },
+  {
+    company: "Carvana",
+    role: "Software Engineer II",
+    period: "April 2021 – March 2023",
+    location: "Tempe, AZ · Hybrid",
+    highlights: [
+      "Built React, TypeScript, and C# applications for tracking vehicle events and locations across Carvana’s supply chain.",
+    ],
+  },
+  {
+    company: "KUBRA",
+    role: "Frontend Developer",
+    period: "August 2018 – April 2021",
+    location: "Tempe, AZ · On-site",
+    highlights: [
+      "Built customer-facing and internal frontend microservices for North American utility companies, including a company-wide React and Node.js authentication library.",
+    ],
+  },
+];
+
+const technologies = [
+  "TypeScript",
+  "React",
+  "CSS",
+  "HTML",
+  "Node.js",
+  "Bash",
+  "Python",
+  "Vim",
+];
+---
+
+<Page title="Résumé | Frankie DeNell" description="Frankie DeNell — Staff Frontend Engineer">
+  <article class="cv blog-container">
+    <header class="cv-header">
+      <div>
+        <p class="eyebrow">Résumé</p>
+        <h1>Frankie DeNell</h1>
+        <p class="role">Staff Frontend Engineer</p>
+        <address>
+          <a href="mailto:frankie@fmweb.dev">frankie@fmweb.dev</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://fmweb.dev">fmweb.dev</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://www.linkedin.com/in/frankiedenell/">linkedin.com/in/frankiedenell</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://github.com/tiltFrankie">github.com/tiltFrankie</a>
+        </address>
+      </div>
+      <button class="print-button" type="button" onclick="window.print()">Save as PDF</button>
+    </header>
+
+    <section aria-labelledby="technologies-heading">
+      <h2 id="technologies-heading">Technologies &amp; Languages</h2>
+      <ul class="technology-list" aria-label="Technologies and languages">
+        {technologies.map((technology) => <li>{technology}</li>)}
+      </ul>
+    </section>
+
+    <section aria-labelledby="experience-heading">
+      <h2 id="experience-heading">Experience</h2>
+      <div class="entries">
+        {experience.map((job) => (
+          <article class="job">
+            <header class="job-header">
+              <div>
+                <h3>{job.company}</h3>
+                <p class="job-role">{job.role}</p>
+              </div>
+              <p class="job-meta">
+                <span>{job.period}</span>
+                <span>{job.location}</span>
+              </p>
+            </header>
+            <ul class="highlights">
+              {job.highlights.map((highlight) => <li>{highlight}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section aria-labelledby="projects-heading">
+      <h2 id="projects-heading">Projects</h2>
+      <div class="entries projects">
+        <article>
+          <h3>Homelab</h3>
+          <p>I run my own Headscale network across two home servers and my personal devices. I’ve set up custom domains and local HTTPS with Caddy, backed by two Pi-hole servers for redundant DNS across the network.</p>
+        </article>
+      </div>
+    </section>
+  </article>
+</Page>
+
+<style>
+  .cv {
+    width: 100%;
+    padding-top: clamp(3rem, 8vw, 7rem);
+    padding-bottom: 5rem;
+  }
+
+  .cv-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--white) 20%, transparent);
+  }
+
+  .eyebrow,
+  h2 {
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin-top: 0.25rem;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    line-height: 1;
+  }
+
+  .role {
+    margin-top: 0.75rem;
+    color: var(--grey);
+    font-size: 1.25rem;
+  }
+
+  address {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    font-style: normal;
+  }
+
+  section {
+    display: grid;
+    grid-template-columns: minmax(9rem, 0.3fr) 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--white) 12%, transparent);
+  }
+
+  .technology-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .technology-list li {
+    border: 1px solid color-mix(in srgb, var(--white) 18%, transparent);
+    border-radius: 999px;
+    padding: 0.35rem 0.7rem;
+    color: var(--white);
+  }
+
+  .entries {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .job {
+    break-inside: avoid;
+  }
+
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .job-role {
+    color: var(--accent);
+  }
+
+  .job-meta {
+    flex: 0 0 auto;
+    color: var(--grey);
+    text-align: right;
+  }
+
+  .job-meta span {
+    display: block;
+  }
+
+  .highlights {
+    display: grid;
+    gap: 0.6rem;
+    margin-top: 1rem;
+    padding-left: 1.1rem;
+  }
+
+  .highlights li {
+    list-style: disc;
+    color: var(--white);
+  }
+
+  .projects {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .projects article {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .projects p {
+    margin-top: 0.4rem;
+    color: var(--grey);
+  }
+
+  .cv a,
+  .print-button {
+    border-radius: 9999px;
+  }
+
+  .cv a {
+    padding: 4px;
+  }
+
+  .print-button {
+    border: 0;
+    padding: 0.65rem 1rem;
+    background: transparent;
+    color: var(--accent);
+  }
+
+  @media (width < 40rem) {
+    .cv-header,
+    section {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .job-header {
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .job-meta {
+      text-align: left;
+    }
+  }
+
+  @media print {
+    .cv {
+      max-width: none;
+      padding: 0;
+    }
+
+    .print-button {
+      display: none;
+    }
+
+    .cv a {
+      padding: 0;
+    }
+
+    .cv-header {
+      break-after: avoid;
+    }
+
+    section,
+    .job {
+      break-inside: avoid;
+    }
+
+    h1 {
+      font-size: 30pt;
+    }
+
+    section {
+      grid-template-columns: 1.35in 1fr;
+      gap: 0.2in;
+      padding: 0.16in 0;
+    }
+
+    .entries {
+      gap: 0.15in;
+    }
+
+    .highlights {
+      gap: 0.04in;
+      margin-top: 0.08in;
+    }
+
+    .technology-list {
+      gap: 0.08in 0.14in;
+    }
+
+    .technology-list li {
+      border: 0;
+      padding: 0;
+    }
+  }
+</style>
+
+<style is:global>
+  @media print {
+    @page {
+      size: letter;
+      margin: 0.45in;
+    }
+
+    :root {
+      color-scheme: light;
+      --bg: #fff;
+      --white: #111;
+      --accent: #6b3a00;
+      --grey: #444;
+    }
+
+    body {
+      background: #fff;
+      color: #111;
+      font-size: 9pt;
+      line-height: 1.35;
+    }
+
+    body > .topbar,
+    body > footer,
+    body > canvas,
+    body > div[aria-hidden="true"] {
+      display: none !important;
+    }
+
+    main {
+      padding: 0;
+    }
+
+    a {
+      color: inherit;
+    }
+  }
+</style>
